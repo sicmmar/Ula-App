@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Inicia Sesión</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+  </head>
+  <body class="c-app flex-row align-items-center" onload="login()">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h1>Ugram</h1>
+                <p class="text-muted">Ingresa a tu cuenta</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+                      </svg></span></div>
+                  <input id="in-user" class="form-control" type="text" placeholder="Usuario">
+                </div>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-lock-locked"></use>
+                      </svg></span></div>
+                  <input id="in-pass" class="form-control" type="password" placeholder="Contraseña">
+                </div>
+                <div id="ALERT-LOGIN" class="input-group mb-4">
+                </div>
+                <p class="text-muted">Entrar</p>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary px-4" type="button" onclick="ingreso(0)">Ingresar</button>
+                  </div>
+                  <div class="col-6">
+                    <button class="btn btn-outline-primary px-4" type="button" onclick="ingreso(1)">Con Cámara</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+              <div class="card-body text-center">
+                <div>
+                  <h2>¿No tienes cuenta?</h2>
+                  <p>Regístrate ahora, es totalmente gratis.</p>
+                  <button class="btn btn-lg btn-outline-light mt-3" type="button" onclick="location.href='register.html'">¡Regístrate ahora!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="js/clientAPI.js"></script>
+    <!--<![endif]-->
+    <script>
+      function login(){
+        sessionStorage.clear();
+      }
+
+      const ingreso = async (opcion) => {
+        var username = document.getElementById('in-user');
+        var pass = document.getElementById('in-pass');
+        var alarma = document.getElementById('ALERT-LOGIN');
+        var contrasena = CryptoJS.MD5(pass.value).toString();
+
+        if (username.value == ""){
+          alarma.innerHTML = '<div class="alert alert-danger" role="alert">Debe proveer un usuario</div>';
+        }else{
+          let respuesta;
+          if (opcion == 0){
+            // ingresar con credenciales
+            if (pass.value == "") alarma.innerHTML = '<div class="alert alert-danger" role="alert">Debe proveer una contraseña</div>';
+            else{
+              data = JSON.stringify({
+                "username": username.value,
+                "contrasena": contrasena
+              });
+
+              respuesta = await connectAPI(data, 'ingresar');
+
+
+              if (respuesta['status'] == 202){
+                var sesion = respuesta['Item'];
+                if (sesion == ''){
+                  alarma.innerHTML = '<div class="alert alert-warning" role="alert">Credenciales incorrectas para <strong>' + username.value + '</strong></div>';
+                }else{
+                  alarma.innerHTML = '<div class="alert alert-success" role="alert">Bienvenido/a <strong>' + username.value + '</strong></div>';
+                  sessionStorage.setItem('contrasena', respuesta['Item']['contrasena']['S']);
+                  sessionStorage.setItem('foto_perfil', respuesta['Item']['foto_perfil']['S']);
+                  sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
+                  sessionStorage.setItem('username', respuesta['Item']['username']['S']);
+                  for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
+                  location.href='login.html';
+                }
+
+              }else if (respuesta['status'] == 303){
+                alarma.innerHTML = '<div class="alert alert-warning" role="alert">El usuario <strong>' + username.value + '</strong> no existe.</div>';
+              }else{
+                alarma.innerHTML = '<div class="alert alert-danger" role="alert">Ingreso para ' + username.value + ' incorrecto!</div>';
+              }
+            }
+          }else if(opcion == 1){
+            //ingresar con camara web
+            sessionStorage.setItem('username', username.value)
+            location.href = "web.html"
+          }
+          
+          pass.value = "";
+        }
+      }
+    </script>
+  </body>
+</html>
