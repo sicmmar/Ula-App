@@ -1,4 +1,4 @@
-const URL = "3.15.161.46:7050";
+const URL = "localhost:7050";
 
 const connectAPI = async (cuerpo, endpoint) => {
     const response = await fetch("http://" + URL + "/" + endpoint, {
