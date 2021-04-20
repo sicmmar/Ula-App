@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Registro</title>
+
+    <script src="node_modules/country-region-dropdown-menu/assets/js/geodatasource-cr.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="node_modules/country-region-dropdown-menu/assets/css/geodatasource-countryflag.css">
+
+    <link rel="gettext" type="application/x-po" href="node_modules/country-region-dropdown-menu/languages/es/LC_MESSAGES/es.po" />
+    <script type="text/javascript" src="node_modules/country-region-dropdown-menu/assets/js/Gettext.js"></script>
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+  </head>
+  <body class="c-app flex-row align-items-center" onload="startPrinc()">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card-group">
+            <div class="card mx-4">
+              <div class="card-body p-4">
+                <h1>Ula'</h1>
+                <p class="text-muted">Crea tu cuenta</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-at"></use>
+                      </svg></span></div>
+                  <input id="in-user" class="form-control" type="text" placeholder="Usuario">
+                  <div id="msg-user"></div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+                      </svg></span></div>
+                  <input id="in-name" class="form-control" type="text" placeholder="Nombre Completo">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-location-pin"></use>
+                      </svg></span></div>
+                      <select id="in-country" class="form-control gds-cr" country-data-region-id="gds-cr-1" data-language="es"></select>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-lock-locked"></use>
+                      </svg></span></div>
+                  <input id="in-pass1" class="form-control" type="password" placeholder="Contraseña">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-lock-locked"></use>
+                      </svg></span></div>
+                  <input id="in-pass2" class="form-control" type="password" placeholder="Confirme Contraseña">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend"><span class="input-group-text">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-camera"></use>
+                      </svg></span></div>
+                  <input id="in-foto" class="form-control" type="text" placeholder="Foto de perfil" disabled>
+                  <div class="input-group-prepend"><span class="input-group-text">.jpg</span></div>
+                </div>
+                <div class="input-group mb-3" id="ALARMA"></div>
+              </div>
+              <div class="card-footer p-4">
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-block btn-secondary" type="button" onclick="location.href='/index.html'"><span>Log In</span></button>
+                  </div>
+                  <div class="col-6">
+                    <button class="btn btn-block btn-success" type="button" onclick="registrarUsuario()"><span>Registrar</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card py-5 d-md-down-none" style="width:44%">
+              <div class="card-body text-center">
+                <div>
+                  <h2>Foto de Perfil</h2>
+                  <p>Elije tu foto de perfil</p>
+                  <img id="imagenPrev" width="85%" height="100%" hidden="true" />
+                  <video id="video" width="85%" 
+                    height="100%" autoplay> 
+                  </video>
+                  <button class="btn btn-lg btn-outline-primary mt-3" type="button" onclick="tomarFoto()">¡Toma una ahora!</button>
+                  <button class="btn btn-lg btn-outline-danger mt-3" type="button" onclick="start()"><svg class="c-icon">
+                    <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-ban"></use>
+                  </svg></button>
+                  <button id="btn-use" class="btn btn-lg btn-outline-success mt-3" type="button" onclick="useFoto()"><svg class="c-icon">
+                    <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-check-alt"></use>
+                  </svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="js/clientAPI.js"></script>
+    <script> 
+      var stop = function () { 
+          var stream = video.srcObject; 
+          var tracks = stream.getTracks(); 
+          for (var i = 0; i < tracks.length; i++) { 
+              var track = tracks[i]; 
+              track.stop(); 
+          } 
+          video.srcObject = null; 
+      } 
+
+      function startPrinc(){
+        document.getElementById('in-user').value = ""
+        document.getElementById('in-name').value = ""
+        start();
+      }
+      function start () { 
+        var img = document.getElementById('imagenPrev');
+        img.hidden = true;
+        img.src = "";
+        var foto = document.getElementById('in-foto');
+        foto.removeAttribute('class');
+        foto.setAttribute("class","form-control")
+        foto.value = ""
+        var pass2 = document.getElementById('in-pass2')
+        pass2.removeAttribute('type');
+        pass2.setAttribute('type','password')
+
+        var video = document.getElementById('video'), 
+            vendorUrl = window.URL || window.webkitURL; 
+        video.hidden = false
+        if (navigator.mediaDevices.getUserMedia) { 
+            navigator.mediaDevices.getUserMedia({ video: true }) 
+                .then(function (stream) { 
+                    video.srcObject = stream; 
+                }).catch(function (error) { 
+                    console.log("Something went wrong!"); 
+                }); 
+        } 
+
+        document.getElementById('btn-use').disabled = true
+          
+      } 
+      function tomarFoto(){
+        video = document.getElementById("video");
+
+        const canvas = document.createElement("canvas");
+        // scale the canvas accordingly
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        // draw the video at that frame
+        canvas.getContext('2d')
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+        // convert it to a usable data URL
+        const dataURL = canvas.toDataURL()
+        console.log(dataURL)
+        video.hidden = true
+        imagen = document.getElementById("imagenPrev");
+        imagen.src = dataURL
+        imagen.hidden = false
+
+        var botonUsar = document.getElementById('btn-use');
+        botonUsar.disabled = false
+      }
+      const registrarUsuario = async () => {
+        let arr = ['in-user','in-name','in-pass1','in-pass2', 'in-country']
+        for (let index = 0; index < arr.length; index++) {
+          document.getElementById(arr[index]).removeAttribute('class');
+          document.getElementById(arr[index]).setAttribute("class","form-control")  
+        }
+        var username = document.getElementById('in-user');
+        var nombre = document.getElementById('in-name');
+        var pass1 = document.getElementById('in-pass1');
+        var pass2 = document.getElementById('in-pass2');
+        var foto = document.getElementById('in-foto');
+        var imagen = document.getElementById("imagenPrev");
+        var country = document.getElementById('in-country');
+
+        // aca va la peticion para ver si el usuario existe
+        if (username.value != ""){
+          //validaciones del usuario que no exista
+
+          if (nombre.value != ""){
+            if(country.value != ""){
+              if (foto.value != ""){
+                if (pass1.value != ""){
+                  if(pass1.value == pass2.value){
+                    var contrasena = CryptoJS.MD5(pass1.value).toString();
+                    for (let index = 0; index < arr.length; index++) {
+                      document.getElementById(arr[index]).removeAttribute('class');
+                      document.getElementById(arr[index]).setAttribute("class","form-control is-valid")  
+                    }
+
+                    //enviar peticion para registrar un nuevo usuario
+                    data = JSON.stringify({
+                      "username": username.value,
+                      "nombre":nombre.value,
+                      "contrasena": contrasena,
+                      "nFoto": foto.value,
+                      "ext":"jpg",
+                      "b64": imagen.src,
+                      "pais": country.value
+                    });
+
+                    const respuesta = await connectAPI(data, 'registrar');
+                    var existe = respuesta['existe'];
+                    var status = respuesta['status'];
+                    if (existe == 'true'){
+                      username.removeAttribute('class');
+                      username.setAttribute("class","form-control is-invalid")
+                      username.setAttribute('placeholder','Este usuario ya existe');
+                      document.getElementById('ALARMA').innerHTML = '<div class="alert alert-danger" role="alert">Usuario <strong>' + username.value + '</strong> ya existe.</div>';
+                      pass1.value = "", pass2.value = "";
+                    }else if (existe == 'false' && (status >= 200 && status < 300)){
+                      document.getElementById('ALARMA').innerHTML = '<div class="alert alert-success" role="alert">Usuario Creado con Éxito. Ingresa a tu cuenta <a class="alert-link" href="index.html">aquí</a>.</div>';
+                      pass1.value = "", pass2.value = "", imagen.src = "";
+                    }else{
+                      username.removeAttribute('class');
+                      username.setAttribute("class","form-control is-invalid")
+                      username.setAttribute('placeholder','Hubo un error al crear este usuario. Intente más tarde');
+                    }
+                    
+                  }else{
+                    pass2.removeAttribute('class');
+                    pass2.setAttribute("class","form-control is-invalid");
+                    pass2.setAttribute('placeholder','Las contraseñas no coinciden');
+                    pass2.value = "";
+                    document.getElementById('msg-pass2').value = "Las contraseña no coinciden";
+                  }
+                }else{
+                  pass1.removeAttribute('class');
+                  pass1.setAttribute("class","form-control is-invalid")
+                }
+              }else{
+                foto.removeAttribute('class');
+                foto.setAttribute("class","form-control is-invalid")
+              }
+            }else{
+              country.removeAttribute('class');
+              country.setAttribute("class","form-control is-invalid")
+            }
+          }else{
+            nombre.removeAttribute('class');
+            nombre.setAttribute("class","form-control is-invalid")
+          }
+        }else{
+          username.removeAttribute('class');
+          username.setAttribute("class","form-control is-invalid")
+        }
+      }
+
+      
+      function useFoto(){
+        if (document.getElementById('in-user').value == ""){
+          var arr = ["in-foto","in-user"];
+          for (let index = 0; index < arr.length; index++) {
+            document.getElementById(arr[index]).removeAttribute('class')
+            document.getElementById(arr[index]).setAttribute("class","form-control is-invalid")
+          }
+        }else{
+          var nombref = "profile-" + document.getElementById('in-user').value
+          document.getElementById('in-foto').value = nombref;
+          document.getElementById('in-foto').removeAttribute('class')
+          document.getElementById('in-foto').setAttribute("class","form-control is-valid")
+          document.getElementById('in-user').removeAttribute('class')
+          document.getElementById('in-user').setAttribute("class","form-control")
+        }
+      }
+    </script> 
+    <!--<![endif]-->
+  </body>
+</html>

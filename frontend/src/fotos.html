@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Ugram - Fotos</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+    <link href="node_modules/@coreui/chartjs/dist/css/coreui-chartjs.css" rel="stylesheet">
+  </head>
+  <body class="c-app" onload="verToken()">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+      <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-title">Perfil</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="login.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+            </svg> Ver Perfil</a></li>
+        <li class="c-sidebar-nav-title">Manejo de Fotos</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="fotos.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-camera"></use>
+            </svg> Fotos</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="album.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
+            </svg> Álbum</a></li>
+            <li class="c-sidebar-nav-title">Soporte</li>
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="chat.html">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-mobile"></use>
+                </svg>Chat</a></li>
+      </ul>
+      <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    </div>
+    <div class="c-wrapper c-fixed-components">
+      <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button><a class="c-header-brand d-lg-none" href="#">
+          <svg width="118" height="46" alt="CoreUI Logo">
+            <use xlink:href="assets/brand/coreui.svg#full"></use>
+          </svg></a>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button>
+        <ul class="c-header-nav d-md-down-none">
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="login.html">Perfil</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Fotos</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="album.html">Álbum</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="chat.html">Chat</a></li>
+        </ul>
+        <ul class="c-header-nav ml-auto mr-4">
+          <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <div class="c-avatar"><img id="img-perfil" class="c-avatar-img"></div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right pt-0">
+              <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                <svg class="c-icon mr-2">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-account-logout"></use>
+                </svg> Salir</a>
+            </div>
+          </li>
+        </ul>
+      </header>
+      <div class="c-body">
+        <main class="c-main">
+          <div class="container-fluid">
+            <div class="fade-in"><div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h4 class="card-title mb-0">Fotografía</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- /.col-->
+                  <div class="col-sm-6 col-md-5">
+                    <div class="card card-accent-warning">
+                      <div class="card-header">Elige foto</div>
+                      <div class="card-body text-center">
+                        <div class="form-group">
+                          <input id="photo-edit" type="file" name="file-multiple-input" accept="image/png, image/jpeg" onchange="subirImg()">
+                        </div>
+                        <div class="form-group">
+                          <img id="prev-img" width="85%" height="100%"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.col-->
+                  <div class="col-sm-6 col-md-6">
+                    <div class="card card-accent-secondary">
+                      <div class="card-header">Subir Foto</div>
+                      <div class="card-body text-center">
+                        <div class="form-group">
+                          <label for="company">Nombre de la foto</label>
+                          <div class="input-group">
+                            <input class="form-control" id="name-photo" type="text">
+                            <div id="ext-img" class="input-group-append"></div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="ccmonth">Descripción para la foto</label>
+                          <textarea class="form-control" id="txt-foto" type="text" rows="7" placeholder="Escribe algo acerca de la foto ..."></textarea>
+                        </div>
+                        <div class="form-group">
+                          <div id="ALERT-SUB"></div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <button id="sub-btn" class="btn btn-sm btn-success" type="submit" onclick="nuevaFoto()" disabled> Subir</button>
+                        <button class="btn btn-sm btn-danger" type="reset" onclick="location.href='fotos.html'"> Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.col-->
+                </div>
+              </div>
+            </div>
+            <!-- /.card-->
+            </div>
+          </div>
+        </main>
+        <footer class="c-footer">
+          <div>Mariana Sic. 201504051</div>
+        </footer>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <!--<![endif]-->
+    <!-- Plugins and scripts required by this view-->
+    <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
+    <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
+    <script src="js/clientAPI.js"></script>
+    <script>
+      function subirImg(){
+        var imgInput = document.getElementById('photo-edit');
+        var preview = document.getElementById('prev-img');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        var arr = imgInput.value.split("C:\\fakepath\\")[1].split('.');
+        document.getElementById('name-photo').value = arr[0];
+        document.getElementById('ext-img').innerHTML = '<span id="EXT" class="input-group-text">' + arr[1] + '</span>';
+        document.getElementById('sub-btn').disabled = false;
+      }
+
+      const verToken = async () => {
+        const pass = sessionStorage.getItem('contrasena');
+          if (pass == null){
+            window.location = 'index.html';
+          }else{
+            document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
+          }
+      }
+
+      const nuevaFoto = async () => {
+        var img = document.getElementById('prev-img');
+        var nombre_foto = document.getElementById('name-photo');
+        var imgInput = document.getElementById('photo-edit');
+        var ALERTA = document.getElementById('ALERT-SUB');
+        var descripcion = document.getElementById('txt-foto');
+
+        if(img.src != '' && nombre_foto.value != ''){
+          ALERTA.innerHTML = "";
+          
+          var datos = JSON.stringify({
+            "username": sessionStorage.getItem('username'),
+            "nFoto":nombre_foto.value,
+            "ext":imgInput.value.split("C:\\fakepath\\")[1].split('.')[1],
+            "b64":img.src,
+            "descripcion": descripcion.value == "" ? "Sin descripción" : descripcion.value
+          });
+
+          const respuesta = await connectAPI(datos, 'nuevaFoto');
+          if (respuesta['status'] == 202 && respuesta['existe'] != null){
+            ALERTA.innerHTML = '<div class="alert alert-success" role="alert">Foto <strong>' + nombre_foto.value + '</strong> cargada.</div>';
+            img.src = "";
+            document.getElementById('ext-img').innerHTML = '';
+            nombre_foto.value = ""
+            document.getElementById('sub-btn').disabled = true;
+          }else ALERTA.innerHTML = '<div class="alert alert-warning" role="alert">Error al cargar <strong>' + nombre_foto.value + '</strong></div>';
+        }else{
+          ALERTA.innerHTML = '<div class="alert alert-danger" role="alert">Ingrese la foto a cargar.</div>';
+        }
+      }
+    </script>
+  </body>
+</html>

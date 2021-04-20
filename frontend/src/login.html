@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Ugram - Inicio</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+    <link href="node_modules/@coreui/chartjs/dist/css/coreui-chartjs.css" rel="stylesheet">
+  </head>
+  <body class="c-app" onload="verificarToken()">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+      <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-title">Perfil</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="login.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+            </svg> Ver Perfil</a></li>
+        <li class="c-sidebar-nav-title">Manejo de Fotos</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="fotos.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-camera"></use>
+            </svg> Fotos</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="album.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
+            </svg> Álbum</a></li>
+            <li class="c-sidebar-nav-title">Soporte</li>
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="chat.html">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-mobile"></use>
+                </svg>Chat</a></li>
+      </ul>
+      <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    </div>
+    <div class="c-wrapper c-fixed-components">
+      <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button><a class="c-header-brand d-lg-none" href="#">
+          <svg width="118" height="46" alt="CoreUI Logo">
+            <use xlink:href="assets/brand/coreui.svg#full"></use>
+          </svg></a>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button>
+        <ul class="c-header-nav d-md-down-none">
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="login.html">Perfil</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Fotos</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="album.html">Álbum</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="chat.html">Chat</a></li>
+        </ul>
+        <ul class="c-header-nav ml-auto mr-4">
+          <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <div class="c-avatar"><img id="img-perfil" class="c-avatar-img"></div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right pt-0">
+              <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                <svg class="c-icon mr-2">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-account-logout"></use>
+                </svg> Salir</a>
+            </div>
+          </li>
+        </ul>
+      </header>
+      <div class="c-body">
+        <main class="c-main">
+          <div class="container-fluid">
+            <div class="fade-in">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h4 class="card-title mb-0">Datos Personales</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                      <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#infoModal">
+                        <svg class="c-icon">
+                          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-pencil"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-md-5">
+                      <div class="card card-accent-warning">
+                        <div class="card-header">Foto de Perfil</div>
+                        <div class="card-body text-center">
+                          <img id="imagenPerfil" width="85%" height="100%"/>
+                        </div>
+                        <div class="card-footer">
+                          <div class="row align-items-center">
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag1" class="btn btn-pill btn-block btn-success"></button>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag2" class="btn btn-pill btn-block btn-light"></button>
+                            </div>
+                          </div>
+                          <div class="row align-items-center mt-3">
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag3" class="btn btn-pill btn-block btn-info"></button>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag4" class="btn btn-pill btn-block btn-danger"></button>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag5" class="btn btn-pill btn-block btn-warning"></button>
+                            </div>
+                          </div>
+                          <div class="row align-items-center mt-3">
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag6" class="btn btn-pill btn-block btn-dark"></button>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-4 col-xl mb-3 mb-xl-0">
+                              <button id="tag7" class="btn btn-pill btn-block btn-primary"></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-md-6">
+                      <div class="card card-accent-secondary">
+                        <div class="card-header">Datos Personales</div>
+                        <div class="card-body">
+                          <div class="form-group">
+                            <label for="company">Nombre Usuario</label>
+                            <input class="form-control" id="name-profile" type="text" disabled>
+                          </div>
+                          <div class="form-group">
+                            <label for="company">Usuario</label>
+                            <input class="form-control" id="user-profile" type="text" disabled>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-->
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h4 class="card-title mb-0">Extraer Texto</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                      <button id="down-ext" class="btn btn-primary" type="button" onclick="downTexto()" disabled>
+                        <svg class="c-icon">
+                          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-data-transfer-down"></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-md-5">
+                      <div class="card card-accent-warning">
+                        <div class="card-header">Elige foto</div>
+                        <div class="card-body text-center">
+                          <div class="form-group">
+                            <input id="photo-edit" type="file" name="file-multiple-input" accept="image/png, image/jpeg" onchange="subirImg()">
+                          </div>
+                          <div class="form-group">
+                            <img id="prev-img" width="85%" height="100%"/>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <button id="btn-ext" class="btn btn-sm btn-success" type="submit" onclick="extraerTexto()" disabled> Subir</button>
+                          <button class="btn btn-sm btn-danger" type="reset" onclick="location.href='login.html'"> Cancelar</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-md-6">
+                      <div class="card card-accent-secondary">
+                        <div class="card-header">Resultado<span id="label-ext" class="badge badge-pill badge-success float-right"></span></div>
+                        <div class="card-body">
+                          <div class="form-group">
+                            <label for="company">Copia y pega o descarga!</label>
+                            <textarea class="form-control" id="txt-extraer" type="text" rows="11" placeholder="Texto Resultado ..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.col-->
+                  </div>
+                </div>
+              </div>
+              <!-- /.modal-->
+              <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-info" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Editar Perfil</h4>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="cerrarModal()" ><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="company">Usuario</label>
+                        <input class="form-control" id="user-edit" type="text" placeholder="" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label for="company">Nombre</label>
+                        <input class="form-control" id="nombre-edit" type="text" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="company">Actualiza tu foto de perfil</label>
+                        <div class="col-md-9">
+                          <input id="editar-foto" onchange="cambPerfil()" type="file" accept="image/png, image/jpeg">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <img id="prev-editar-foto" width="85%" height="100%"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="company">Confirma contraseña</label>
+                        <input class="form-control" id="contrasena-edit" type="password" placeholder="">
+                      </div>
+                      <div class="form-group" id="ALE-MOD"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="cerrarModal()">Cerrar</button>
+                      <button class="btn btn-info" type="button" onclick="editarDatos()">Guardar Cambios</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content-->
+                </div>
+                <!-- /.modal-dialog-->
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="c-footer">
+          <div>Mariana Sic. 201504051</div>
+        </footer>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <!--<![endif]-->
+    <!-- Plugins and scripts required by this view-->
+    <script src="js/popovers.js"></script>
+    <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
+    <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="js/clientAPI.js"></script>
+    <script>
+      function cambPerfil(){
+        var imgInput = document.getElementById('editar-foto');
+        var preview = document.getElementById('prev-editar-foto');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function cerrarModal(){
+        document.getElementById('contrasena-edit').value = ""
+      }
+
+      function verificarToken(){
+          const pass = sessionStorage.getItem('contrasena');
+          if (pass == null){
+            window.location = 'index.html';
+          }else{
+            var nombre = document.getElementById('nombre-edit')
+            var username = document.getElementById('user-edit');
+            var img = document.getElementById('prev-editar-foto');
+
+            document.getElementById('imagenPerfil').src = sessionStorage.getItem('foto_perfil');
+            document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
+            document.getElementById('name-profile').value = sessionStorage.getItem('nombre');
+            document.getElementById('user-profile').value = sessionStorage.getItem('username');
+
+            //modal para editar
+            nombre.value = sessionStorage.getItem('nombre');
+            username.value = sessionStorage.getItem('username');
+            img.src = sessionStorage.getItem('foto_perfil');
+
+            for(x = 1; x <= 7; x++){
+              var tag = 'tag' + x.toString();
+              document.getElementById(tag).textContent = sessionStorage.getItem(tag);
+            }
+
+          }
+      }
+
+      const editarDatos = async () => {
+        var nombre = document.getElementById('nombre-edit')
+        var username = document.getElementById('user-edit');
+        var img = document.getElementById('prev-editar-foto');
+        var passw = document.getElementById('contrasena-edit');
+        var contrass = CryptoJS.MD5(passw.value).toString();
+        var imgInput = document.getElementById('editar-foto');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+        
+        var datos = JSON.stringify({
+          "username": username.value,
+          "nombre":nombre.value,
+          "contrasena": contrass,
+          "nFoto": file['name'].toString().split('.')[0],
+          "ext":file['name'].toString().split('.')[1],
+          "b64": img.src
+        })
+
+        const respuesta = await connectAPI(datos, 'editarPerfil');
+        const stat = respuesta['status'];
+
+        if (stat == 303){
+          document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Contraseña incorrecta para <strong>' + username.value + '</strong></div>';
+        }else if (stat >= 200 && stat < 300){
+          var nueva = respuesta['Item'];
+          if (nueva == ''){
+            document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">El usuario <strong>' + username.value + '</strong> no existe.</div>';
+          }else{
+            document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-success" role="alert">Datos de <strong>' + username.value + '</strong> modificados</div>';
+            sessionStorage.clear();
+            sessionStorage.setItem('contrasena', respuesta['Item']['contrasena']['S']);
+            sessionStorage.setItem('foto_perfil', respuesta['Item']['foto_perfil']['S']);
+            sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
+            sessionStorage.setItem('username', respuesta['Item']['username']['S']);
+            for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
+            verificarToken();
+          } 
+        }
+        passw.value = "";
+
+      }
+
+      // PARA EL MANEJO DE LA EXTRACCION DE TEXTO DE UNA FOTO
+
+      function subirImg(){
+        var imgInput = document.getElementById('photo-edit');
+        var preview = document.getElementById('prev-img');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        document.getElementById('label-ext').textContent = imgInput.value.split("C:\\fakepath\\")[1].split('.')[0] + '.txt';
+
+        document.getElementById('btn-ext').disabled = false;
+
+      }
+
+      const extraerTexto = async () => {
+        var preview = document.getElementById('prev-img');
+        var boxTexto = document.getElementById('txt-extraer');
+
+        var datos = JSON.stringify({
+          "imagen": preview.src
+        })
+
+        const respuesta = await connectAPI(datos, 'extraerTexto');
+        let stat = respuesta['texto'];
+        boxTexto.textContent = ""
+        for(let x = 0; x < stat.length; x ++) boxTexto.textContent += stat[x] + '\n';
+
+        
+        document.getElementById('down-ext').disabled = false;
+      }
+
+      function downTexto(){
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('txt-extraer').textContent));
+        element.setAttribute('download', document.getElementById('label-ext').textContent);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+    </script>
+  </body>
+</html>
