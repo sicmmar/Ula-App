@@ -16,7 +16,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>Ugram - Fotos</title>
+    <title>Ula' - Publicaciones</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
@@ -60,11 +60,11 @@
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
             </svg> Ver Perfil</a></li>
-        <li class="c-sidebar-nav-title">Manejo de Fotos</li>
+        <li class="c-sidebar-nav-title">Manejo de Publicaciones</li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="fotos.html">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-camera"></use>
-            </svg> Fotos</a></li>
+            </svg> Publicaciones</a></li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="album.html">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
@@ -94,13 +94,13 @@
         </button>
         <ul class="c-header-nav d-md-down-none">
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="login.html">Perfil</a></li>
-          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Fotos</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Publicaciones</a></li>
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="album.html">Álbum</a></li>
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="chat.html">Chat</a></li>
         </ul>
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              <div class="c-avatar"><img id="img-perfil" class="c-avatar-img"></div>
+              <div class="c-avatar"><img id="img-perfil" class="c-avatar-img"><span class="c-avatar-status bg-success"></span></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
               <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
@@ -118,55 +118,88 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between">
                   <div>
-                    <h4 class="card-title mb-0">Fotografía</h4>
+                    <h4 class="card-title mb-0">Publicaciones</h4>
+                  </div>
+                  <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#infoModal">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-note-add"></use>
+                      </svg>
+                    </button>
                   </div>
                 </div>
-                <div class="row">
+                <div id="publicaciones" class="row">
                   <!-- /.col-->
-                  <div class="col-sm-6 col-md-5">
-                    <div class="card card-accent-warning">
-                      <div class="card-header">Elige foto</div>
-                      <div class="card-body text-center">
-                        <div class="form-group">
-                          <input id="photo-edit" type="file" name="file-multiple-input" accept="image/png, image/jpeg" onchange="subirImg()">
-                        </div>
-                        <div class="form-group">
-                          <img id="prev-img" width="85%" height="100%"/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.col-->
-                  <div class="col-sm-6 col-md-6">
-                    <div class="card card-accent-secondary">
-                      <div class="card-header">Subir Foto</div>
-                      <div class="card-body text-center">
-                        <div class="form-group">
-                          <label for="company">Nombre de la foto</label>
-                          <div class="input-group">
-                            <input class="form-control" id="name-photo" type="text">
-                            <div id="ext-img" class="input-group-append"></div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="ccmonth">Descripción para la foto</label>
-                          <textarea class="form-control" id="txt-foto" type="text" rows="7" placeholder="Escribe algo acerca de la foto ..."></textarea>
-                        </div>
-                        <div class="form-group">
-                          <div id="ALERT-SUB"></div>
-                        </div>
-                      </div>
-                      <div class="card-footer">
-                        <button id="sub-btn" class="btn btn-sm btn-success" type="submit" onclick="nuevaFoto()" disabled> Subir</button>
-                        <button class="btn btn-sm btn-danger" type="reset" onclick="location.href='fotos.html'"> Cancelar</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.col-->
+                  
+                  <!--ACA TERMINA -->
                 </div>
               </div>
             </div>
             <!-- /.card-->
+            <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Nueva Publicación</h4>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="cerrarModal()" ><span aria-hidden="true">×</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="company">Elige una foto para publicar</label>
+                      <div class="col-md-9">
+                        <input id="editar-foto" onchange="cambPerfil()" type="file" accept="image/png, image/jpeg">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <img id="prev-editar-foto" width="85%" height="100%"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Descripción</label>
+                      <textarea class="form-control" id="txt-foto" type="text" rows="3" placeholder="Escribe algo acerca de la foto ..."></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Lugar donde la tomaste</label>
+                      <input class="form-control" id="lugar-foto" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Departamento</label>
+                      <select id="dpto-foto" class="form-control">
+                        <option value=""></option>
+                        <option value="Alta Verapaz">Alta Verapaz</option>
+                        <option value="Baja Verapaz">Baja Verapaz</option>
+                        <option value="Chimaltenango">Chimaltenango</option>
+                        <option value="Chiquimula">Chiquimula</option>
+                        <option value="Petén">Petén</option>
+                        <option value="El Progreso">El Progreso</option>
+                        <option value="Quiché">Quiché</option>
+                        <option value="Escuintla">Escuintla</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Huehuetenango">Huehuetenango</option>
+                        <option value="Izabal">Izabal</option>
+                        <option value="Jalapa">Jalapa</option>
+                        <option value="Jutiapa">Jutiapa</option>
+                        <option value="Quetzaltenango">Quetzaltenango</option>
+                        <option value="Retalhuleu">Retalhuleu</option>
+                        <option value="Sacatepéquez">Sacatepéquez</option>
+                        <option value="San Marcos">San Marcos</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="Sololá">Sololá</option>
+                        <option value="Suchitepéquez">Suchitepéquez</option>
+                        <option value="Totonicapán">Totonicapán</option>
+                        <option value="Zacapa">Zacapa</option>
+                      </select>
+                    </div>
+                    <div class="form-group" id="ALE-MOD"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="cerrarModal()">Cerrar</button>
+                    <button class="btn btn-success" type="button" onclick="nuevaPublicacion()">Publicar</button>
+                  </div>
+                </div>
+                <!-- /.modal-content-->
+              </div>
+              <!-- /.modal-dialog-->
+            </div>
             </div>
           </div>
         </main>
@@ -185,6 +218,8 @@
     <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
     <script src="js/clientAPI.js"></script>
     <script>
+      var nombreFoto = "";
+      var extFoto = "";
       function subirImg(){
         var imgInput = document.getElementById('photo-edit');
         var preview = document.getElementById('prev-img');
@@ -211,6 +246,21 @@
             window.location = 'index.html';
           }else{
             document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
+            
+            //OBTENER TODAS LAS PUBLICACIONES
+            var pubs = '';
+            const respuesta = await getAPI('getPost')
+            for(var i = 0; i < respuesta['tam']; i++){
+              const item = respuesta['items'][i];
+              pubs += '<div class="col-sm-6 col-md-11"><div class="card border-warning"><div class="card-header text-right"><svg class="c-icon"><use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-av-timer"></use>';
+              pubs += '</svg> <mark><small> ' + item['fechahora']['S'] + '</small></mark></div><div class="card-body text-center"><div class="row"><div class="col-sm-6 col-md-5"><img src="' + item['foto']['S'] + '" width="85%" height="100%"/></div>';
+              pubs += '<div class="col-sm-6 col-md-5"><div class="form-group"><h4><br>' + item['lugar']['S'] + '</h4></div><br><br><br><div class="form-group"><p>' + item['descripcion']['S'] + '</p></div><br><br><br><div class="form-group"><h5><svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-location-pin"></use></svg></span> ' + item['departamento']['S'] + '</h5></div></div></div></div><div class="card-footer text-right"><svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-flag-alt"></use></svg> <mark>' + item['pais']['S'] + '</mark>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use></svg> <mark>' + item['username']['S'] + '</mark></div></div></div>';
+            }
+
+            document.getElementById('publicaciones').innerHTML = pubs;
           }
       }
 
@@ -243,6 +293,61 @@
         }else{
           ALERTA.innerHTML = '<div class="alert alert-danger" role="alert">Ingrese la foto a cargar.</div>';
         }
+      }
+
+      ///////-------------------------- PARA REALIZAR NUEVA PUBICACION
+      function cambPerfil(){
+        var imgInput = document.getElementById('editar-foto');
+        var preview = document.getElementById('prev-editar-foto');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        nombreFoto = imgInput.value.split("C:\\fakepath\\")[1].split('.')[0];
+        extFoto = imgInput.value.split("C:\\fakepath\\")[1].split('.')[1];
+      }
+
+      const nuevaPublicacion = async () => {
+        var img = document.getElementById('prev-editar-foto');
+        var imgInput = document.getElementById('editar-foto');
+        var desc = document.getElementById('txt-foto');
+        var departamento = document.getElementById('dpto-foto');
+        var lugar = document.getElementById('lugar-foto');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        if (img.src != ""){
+          if(lugar.value != ""){
+            if(departamento.value != ""){
+              var datos = JSON.stringify({
+                "username": sessionStorage.getItem('username'),
+                "descripcion" : desc.value == "" ? "Sin descripción" : desc.value,
+                "departamento" : departamento.value,
+                "lugar" : lugar.value,
+                "pais" : sessionStorage.getItem('pais'),
+                "nFoto": file['name'].toString().split('.')[0],
+                "ext":file['name'].toString().split('.')[1],
+                "b64": img.src
+              });
+              console.log(datos);
+              
+              const respuesta = await connectAPI(datos, 'newPost');
+              const stat = respuesta['status'];
+
+              if (stat >= 200 && stat < 300){
+                document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-success" role="alert">Publicación realizada</div>';
+                location.href = 'fotos.html'
+              }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">No se ha podido realizar la publicación</div>';
+            }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el departamento donde tomó la foto</div>';
+          }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el lugar donde tomó la foto</div>';
+        }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese una foto para realizar publicación</div>';
       }
     </script>
   </body>

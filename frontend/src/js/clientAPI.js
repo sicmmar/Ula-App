@@ -13,3 +13,15 @@ const connectAPI = async (cuerpo, endpoint) => {
     const respuesta = await response.json();
     return respuesta
 }
+
+const getAPI = async (endpoint) => {
+    const response = await fetch("http://" + URL + "/" + endpoint, {
+        method: "GET",
+        headers: {
+            "Content-Type":"application/json",
+            Accept : "application/json"
+        }
+    });
+
+    return await response.json();
+}

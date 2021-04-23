@@ -2,6 +2,7 @@ from credenciales import credenciales
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from io import BytesIO
+from datetime import date, datetime
 import boto3,json
 import base64
 import uuid
@@ -241,6 +242,59 @@ def editarPerfil():
 
     return jsonify({'status': 202,'Item': ''})
 
+###############################################################################################################################################
+# PUBLICACIONES
+@app.route('/newPost', methods=['POST'])
+def newPost():
+    hoy = datetime.now()
+    username = request.json.get('username')
+    descripcion = request.json.get('descripcion')
+    departamento = request.json.get('departamento')
+    lugar = request.json.get('lugar')
+    pais = request.json.get('pais')
+    nFoto = request.json.get('nFoto')
+    ext = request.json.get('ext')
+    b64 = request.json.get('b64')
+    fechahora = str(hoy.strftime("%B %d, %Y %H:%M:%S"))
+    uniqueID = uuid.uuid1().time_low
+
+    starter = b64.find(',')
+    image_data = b64[starter+1:]
+    image_data = bytes(image_data, encoding="ascii")
+    ubicacion = 'fotos_publicadas/' + nFoto + '-' + str(uniqueID) + '.' + ext 
+
+    s3.upload_fileobj(
+        BytesIO(base64.b64decode(image_data)),
+        BUCKET_NAME,
+        ubicacion,
+        ExtraArgs={'ACL': 'public-read'}
+    )
+
+    dynamo.put_item(
+        TableName='publicacion',
+        Item = {
+            'id_pub': {'N': str(uniqueID)},
+            'username': {'S': username},
+            'descripcion' : {'S': descripcion},
+            'departamento': {'S': departamento},
+            'pais':{'S': pais},
+            'lugar': {'S': lugar},
+            'foto': {'S': URL_BUCKET + ubicacion},
+            'fechahora': {'S': fechahora}
+        }
+    )
+
+
+    return jsonify({'hoy': fechahora, 'status': 202})
+
+@app.route('/getPost', methods=['GET'])
+def getPost():
+    lista = dynamo.scan(
+        TableName='publicacion'
+    )
+
+    return jsonify({'items':lista['Items'], 'tam': lista['Count']})
+
 
 ###############################################################################################################################################
 # MANEJO DE ALBUM
@@ -466,118 +520,6 @@ def usuarioExistente(usernam):
     )
 
     return existe.get('Item')
-
-
-#Analisis facial
-@app.route('/detectarcara', methods=['POST'])
-def detectarcara():
-
-    ubicacion = request.json.get('nFoto')
-
-    response = rek.detect_faces(Image={
-            'S3Object':{
-                    'Bucket':BUCKET_NAME,'Name': ubicacion
-                }
-            },Attributes=['ALL'])
-    #response = rek.detect_faces(Image={'S3Object':{'Bucket':BUCKET_NAME, 'Name': nombre[1]}},Attributes=['ALL'])
-    etiq = []   
-    for aspectos in response['FaceDetails']:
-        if aspectos['AgeRange']: etiq.append({'S':str(aspectos['AgeRange']['Low']) + "-" + str(aspectos['AgeRange']['High']) + " años"})
-        if aspectos['Beard']: etiq.append({'S':"Con Barba" if aspectos['Beard']['Value'] else "Sin Barba"})
-        if aspectos['Eyeglasses']: etiq.append({'S':'Usa Lentes' if aspectos['Eyeglasses']['Value'] else "No usa lentes"})
-        if aspectos['EyesOpen']: etiq.append({'S':"Ojos Abiertos" if aspectos['EyesOpen']['Value'] else "Ojos Cerrados"})
-        if aspectos['Gender']: etiq.append({'S':translate.translate_text(Text=aspectos['Gender']['Value'],SourceLanguageCode='en',TargetLanguageCode='es')['TranslatedText']})
-        if aspectos['Smile']: etiq.append({'S':"Sonriendo" if aspectos['Smile']['Value'] else "Sin Sonreír"})
-        if aspectos['Emotions']:
-            for emociones in aspectos['Emotions']:
-                if emociones['Confidence'] >= 60: etiq.append({'S':translate.translate_text(Text=emociones['Type'],SourceLanguageCode='en',TargetLanguageCode='es')['TranslatedText']})
-    #etiq.append(aspectos['AgeRange']['Low'] + "-" + aspectos['AgeRange']['High'] + " años")
-    print(etiq)
-    return jsonify(response)
-
-
-#Detectar Labels
-@app.route('/detectarlabels', methods=['POST'])
-def detectarlabels():
-    imagen = request.json.get('imagen')
-    nombre = imagen.split(".com/")
-
-    respuesta = rek.detect_labels(Image={'Bytes':base64.b64decode(imagen)},MaxLabels=10)
-    #respuesta = rek.detect_labels(Image={'S3Object':{'Bucket':BUCKET_NAME, 'Name': nombre[1]}},MaxLabels=10)
-    etiquetasDetectadas=[]
-    for label in respuesta['Labels']:
-        etiquetasDetectadas.append(label['Name'])
-        print ("Label: " + label['Name'])
-
-    print(etiquetasDetectadas)
-    return jsonify({'status': 202,'existe': respuesta})
-
-#Comparacion de foto de perfil en Login
-@app.route('/compararfotos', methods=['POST'])
-def compararfotos():
-    imagen = request.json.get('foto_perfil') #Foto almacenada para usarse en perfil
-    imagenOriginal = imagen.split(".com/")
-    imagen2 = request.json.get('foto_login') #Foto nueva solo para ingresar.
-    imagenAcceso = imagen.split(".com/")
-    #Comparar de BucketS3 a BucketS3->
-    #respuesta = rek.compare_faces(SourceImage={'S3Object':{'Bucket':BUCKET_NAME,'Name': imagenOriginal[1]}}, TargetImage={'S3Object':{'Bucket':BUCKET_NAME,'Name': imagenAcceso[1]}},SimilarityThreshold=80)
-    #Comparar de BucketS3 a ImagenB64
-    respuesta = rek.compare_faces(SourceImage={'S3Object':{'Bucket':BUCKET_NAME,'Name': imagenOriginal[1]}}, TargetImage={'Bytes':base64.b64decode(imagen2)},SimilarityThreshold=80)
-    return jsonify({'status': 202,'existe': respuesta})
-
-#Extraer texto
-@app.route('/detectartexto', methods=['POST'])
-def detectartexto():
-    imagen = request.json.get('imagen')
-    nombre = imagen.split(".com/")
-
-    response = rek.detect_text(Image={'Bytes':base64.b64decode(imagen)})
-    textoFinalDetectado=[]
-    textDetections=response['TextDetections']
-    for text in textDetections:
-        textoFinalDetectado.append(text['DetectedText'])
-        print()
-    #response = rek.detect_faces(Image={'S3Object':{'Bucket':BUCKET_NAME, 'Name': nombre[1]}})
-    
-    print(textoFinalDetectado)
-    return jsonify({'status': 202,'existe': response})
-
-
-#TRADUCIR TEXTO
-#A Ingles:
-@app.route('/traduciringles', methods=['POST'])
-def traduciringles():
-    texto = request.json.get('text')
-
-    response = translate.translate_text(Text=texto,SourceLanguageCode='auto',TargetLanguageCode='en')
-    respuestaTraducida = response['TranslatedText']
-    print(respuestaTraducida)
-
-    return jsonify({'status': 202,'existe': response})
-
-
-#A Portugues:
-@app.route('/traducirportugues', methods=['POST'])
-def traducirportugues():
-    texto = request.json.get('text')
-
-    response = translate.translate_text(Text=texto,SourceLanguageCode='auto',TargetLanguageCode='pt')
-    respuestaTraducida = response['TranslatedText']
-    print(respuestaTraducida)
-    
-    return jsonify({'status': 202,'existe': response})
-
-
-#A Ruso:
-@app.route('/traducirruso', methods=['POST'])
-def traducirruso():
-    texto = request.json.get('text')
-
-    response = translate.translate_text(Text=texto,SourceLanguageCode='es',TargetLanguageCode='ru')
-    respuestaTraducida = response['TranslatedText']
-    print(respuestaTraducida)
-    
-    return jsonify({'status': 202,'existe': response})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=7050)
