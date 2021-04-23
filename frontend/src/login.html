@@ -175,62 +175,16 @@
                         <div class="card-header">Datos Personales</div>
                         <div class="card-body">
                           <div class="form-group">
-                            <label for="company">Nombre Usuario</label>
+                            <label for="company">Nombre Completo</label>
                             <input class="form-control" id="name-profile" type="text" disabled>
                           </div>
                           <div class="form-group">
                             <label for="company">Usuario</label>
                             <input class="form-control" id="user-profile" type="text" disabled>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.col-->
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-->
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <h4 class="card-title mb-0">Extraer Texto</h4>
-                    </div>
-                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                      <button id="down-ext" class="btn btn-primary" type="button" onclick="downTexto()" disabled>
-                        <svg class="c-icon">
-                          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-data-transfer-down"></use>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <!-- /.col-->
-                    <div class="col-sm-6 col-md-5">
-                      <div class="card card-accent-warning">
-                        <div class="card-header">Elige foto</div>
-                        <div class="card-body text-center">
                           <div class="form-group">
-                            <input id="photo-edit" type="file" name="file-multiple-input" accept="image/png, image/jpeg" onchange="subirImg()">
-                          </div>
-                          <div class="form-group">
-                            <img id="prev-img" width="85%" height="100%"/>
-                          </div>
-                        </div>
-                        <div class="card-footer">
-                          <button id="btn-ext" class="btn btn-sm btn-success" type="submit" onclick="extraerTexto()" disabled> Subir</button>
-                          <button class="btn btn-sm btn-danger" type="reset" onclick="location.href='login.html'"> Cancelar</button>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.col-->
-                    <div class="col-sm-6 col-md-6">
-                      <div class="card card-accent-secondary">
-                        <div class="card-header">Resultado<span id="label-ext" class="badge badge-pill badge-success float-right"></span></div>
-                        <div class="card-body">
-                          <div class="form-group">
-                            <label for="company">Copia y pega o descarga!</label>
-                            <textarea class="form-control" id="txt-extraer" type="text" rows="11" placeholder="Texto Resultado ..."></textarea>
+                            <label for="company">País de Origen</label>
+                            <input class="form-control" id="country-profile" type="text" disabled>
                           </div>
                         </div>
                       </div>
@@ -333,6 +287,7 @@
             document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
             document.getElementById('name-profile').value = sessionStorage.getItem('nombre');
             document.getElementById('user-profile').value = sessionStorage.getItem('username');
+            document.getElementById('country-profile').value = sessionStorage.getItem('pais');
 
             //modal para editar
             nombre.value = sessionStorage.getItem('nombre');
@@ -388,58 +343,6 @@
         }
         passw.value = "";
 
-      }
-
-      // PARA EL MANEJO DE LA EXTRACCION DE TEXTO DE UNA FOTO
-
-      function subirImg(){
-        var imgInput = document.getElementById('photo-edit');
-        var preview = document.getElementById('prev-img');
-        var reader = new FileReader();
-        var file = imgInput.files[0]; 
-
-        reader.addEventListener("load", function () {
-          preview.src = reader.result;
-        }, false);
-
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-
-        document.getElementById('label-ext').textContent = imgInput.value.split("C:\\fakepath\\")[1].split('.')[0] + '.txt';
-
-        document.getElementById('btn-ext').disabled = false;
-
-      }
-
-      const extraerTexto = async () => {
-        var preview = document.getElementById('prev-img');
-        var boxTexto = document.getElementById('txt-extraer');
-
-        var datos = JSON.stringify({
-          "imagen": preview.src
-        })
-
-        const respuesta = await connectAPI(datos, 'extraerTexto');
-        let stat = respuesta['texto'];
-        boxTexto.textContent = ""
-        for(let x = 0; x < stat.length; x ++) boxTexto.textContent += stat[x] + '\n';
-
-        
-        document.getElementById('down-ext').disabled = false;
-      }
-
-      function downTexto(){
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('txt-extraer').textContent));
-        element.setAttribute('download', document.getElementById('label-ext').textContent);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
       }
     </script>
   </body>

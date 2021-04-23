@@ -145,6 +145,7 @@
                   sessionStorage.setItem('foto_perfil', respuesta['Item']['foto_perfil']['S']);
                   sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
                   sessionStorage.setItem('username', respuesta['Item']['username']['S']);
+                  sessionStorage.setItem('pais', respuesta['Item']['pais']['S']);
                   for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
                   location.href='login.html';
                 }

@@ -39,9 +39,10 @@ chat = boto3.client('lex-runtime',
         aws_secret_access_key=credenciales.lex['secretAccessKey']
     )
 
-BUCKET_NAME='practica2-g45-imagenes'
+BUCKET_NAME='imagenes-ula'
 BOT_NAME='UgramPro'
 BOT_ALIAS='ugrampro'
+URL_BUCKET = 'https://imagenes-ula.s3.us-east-2.amazonaws.com/'
 
 @app.route('/')
 def result():
@@ -156,15 +157,15 @@ def registrar():
         Item = {
             'username': {'S': usern},
             'nombre': {'S': nombre},
+            'pais':{'S': pais},
             'contrasena': {'S': passw},
             'nFoto' : {'S': nFoto + '-' + uniqueID + '.' + ext},
-            'foto_perfil': {'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion},
+            'foto_perfil': {'S': URL_BUCKET + ubicacion},
             'etiquetas': {'L': etiq},
-            'album':{'L':[{'L': [{'S':'Perfil'},{'L':[{'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion}]}]}]}       
+            'album':{'L':[{'L': [{'S':'Perfil'},{'L':[{'S': URL_BUCKET + ubicacion}]}]}]}       
         }
     )
 
-    #status = resp['ResponseMetadata']['HTTPStatusCode']
     return jsonify({'status': 202,'existe': "false"})
 
 #editar datos del perfil de usuario
@@ -192,7 +193,7 @@ def editarPerfil():
             for alb in album_perfil['L']:
                 #aca es cada album
                 if alb['L'][0]['S'] == 'Perfil':
-                    alb['L'][1]['L'].append({'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion})
+                    alb['L'][1]['L'].append({'S': URL_BUCKET + ubicacion})
                     break
 
             s3.upload_fileobj(
@@ -229,7 +230,7 @@ def editarPerfil():
                 ExpressionAttributeValues = {
                     ':n': {'S': nombre},
                     ':nf': {'S': nFoto + '-' + uniqueID + '.' + ext},
-                    ':fp': {'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion},
+                    ':fp': {'S': URL_BUCKET + ubicacion},
                     ':prof':album_perfil,
                     ':et':{'L': etiq}
                 }
@@ -357,11 +358,11 @@ def nuevaFoto():
             while not existe and x < len(albumes['L']):
                 if albumes['L'][x]['L'][0]['S'] == label:
                     existe = True
-                    albumes['L'][x]['L'][1]['L'].append({'L':[{'S':nombre_foto},{'S': descr},{'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion}]})
+                    albumes['L'][x]['L'][1]['L'].append({'L':[{'S':nombre_foto},{'S': descr},{'S': URL_BUCKET + ubicacion}]})
                 x+=1
             
             if not existe:
-                albumes['L'].append({'L': [{'S':label},{'L':[{'L':[{'S':nombre_foto},{'S': descr},{'S': "https://practica2-g45-imagenes.s3.us-east-2.amazonaws.com/" + ubicacion}]}]}]})
+                albumes['L'].append({'L': [{'S':label},{'L':[{'L':[{'S':nombre_foto},{'S': descr},{'S': URL_BUCKET + ubicacion}]}]}]})
 
                 
         dynamo.update_item(
