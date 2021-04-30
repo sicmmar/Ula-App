@@ -255,6 +255,7 @@ def newPost():
     nFoto = request.json.get('nFoto')
     ext = request.json.get('ext')
     b64 = request.json.get('b64')
+    guardar = request.json.get('guardar')
     fechahora = str(hoy.strftime("%B %d, %Y %H:%M:%S"))
     uniqueID = uuid.uuid1().time_low
 
@@ -284,6 +285,47 @@ def newPost():
         }
     )
 
+    #se guarda en el album personal
+    if guardar:
+        respuesta = rek.detect_labels(
+            Image={
+                'S3Object':{
+                        'Bucket':BUCKET_NAME,'Name': ubicacion
+                    }
+                },
+            MaxLabels=2)
+        
+        etiq = []
+        for x in respuesta['Labels']:
+            response = translate.translate_text(Text=x['Name'],SourceLanguageCode='en',TargetLanguageCode='es')
+            etiq.append(response['TranslatedText'])
+
+
+        albumes = usuarioExistente(username)['album']
+        
+        for label in etiq:
+            existe = False
+            x = 0
+            while not existe and x < len(albumes['L']):
+                if albumes['L'][x]['L'][0]['S'] == label:
+                    existe = True
+                    albumes['L'][x]['L'][1]['L'].append({'L':[{'S':nFoto},{'S': descripcion},{'S': URL_BUCKET + ubicacion}]})
+                x+=1
+            
+            if not existe:
+                albumes['L'].append({'L': [{'S':label},{'L':[{'L':[{'S':nFoto},{'S': descripcion},{'S': URL_BUCKET + ubicacion}]}]}]})
+
+                
+        dynamo.update_item(
+            TableName='usuario',
+            Key = {
+                'username': {'S': username}
+            },
+            UpdateExpression = 'set album=:nal',
+            ExpressionAttributeValues = {
+                ':nal': albumes
+            }
+        )
 
     return jsonify({'hoy': fechahora, 'status': 202})
 

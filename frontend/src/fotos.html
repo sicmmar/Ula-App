@@ -189,6 +189,14 @@
                         <option value="Zacapa">Zacapa</option>
                       </select>
                     </div>
+                    <div class="form-group">
+                      <label for="company">Guardar en álbum personal</label>
+                    </div>
+                    <div class="form-group">
+                      <label class="c-switch c-switch-label c-switch-pill c-switch-outline-success">
+                        <input id="guardar-album" class="c-switch-input" type="checkbox" checked=""><span class="c-switch-slider" data-checked="&#x2713" data-unchecked="&#x2715"></span>
+                      </label>
+                    </div>
                     <div class="form-group" id="ALE-MOD"></div>
                   </div>
                   <div class="modal-footer">
@@ -320,6 +328,7 @@
         var desc = document.getElementById('txt-foto');
         var departamento = document.getElementById('dpto-foto');
         var lugar = document.getElementById('lugar-foto');
+        var guardar = document.getElementById('guardar-album');
         var reader = new FileReader();
         var file = imgInput.files[0]; 
 
@@ -334,7 +343,8 @@
                 "pais" : sessionStorage.getItem('pais'),
                 "nFoto": file['name'].toString().split('.')[0],
                 "ext":file['name'].toString().split('.')[1],
-                "b64": img.src
+                "b64": img.src,
+                "guardar": guardar.checked ? true : false
               });
               console.log(datos);
               
