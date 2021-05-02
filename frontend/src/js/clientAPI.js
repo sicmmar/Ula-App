@@ -1,4 +1,5 @@
 const URL = "localhost:7050";
+const APIG = "https://ys642emfcc.execute-api.us-east-2.amazonaws.com/ulaApi/"
 
 const connectAPI = async (cuerpo, endpoint) => {
     const response = await fetch("http://" + URL + "/" + endpoint, {
@@ -24,4 +25,29 @@ const getAPI = async (endpoint) => {
     });
 
     return await response.json();
+}
+
+const connectGateway = async (cuerpo, endpoint) =>{
+    const respuesta = await superagent
+    .post(APIG + endpoint)
+    .send(cuerpo)
+    .then(res => {
+        return JSON.parse(res.text);
+    }).catch( error => {
+        JSON.parse('{"status":404}');}
+    );
+
+    return respuesta;
+}
+
+const getGateway = async (endpoint) =>{
+    const respuesta = await superagent
+    .get(APIG + endpoint)
+    .then(res => {
+        return JSON.parse(res.text);
+    }).catch( error => {
+        JSON.parse('{"status":404}');}
+    );
+
+    return respuesta;
 }

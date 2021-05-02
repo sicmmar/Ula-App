@@ -166,6 +166,7 @@
     <!-- Plugins and scripts required by this view-->
     <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
     <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
     <script src="js/clientAPI.js"></script>
     <script>
       const verToken = async () => {
@@ -176,7 +177,7 @@
             document.getElementById('ALERT-NEW').innerHTML = ''
             var cartaAlbum = ''
             document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
-            const listaAlbum = await connectAPI(JSON.stringify({'username': sessionStorage.getItem('username'), 'contrasena':sessionStorage.getItem('contrasena')}), 'ingresar')
+            const listaAlbum = await connectGateway(JSON.stringify({'username': sessionStorage.getItem('username'), 'contrasena':sessionStorage.getItem('contrasena')}), 'ingresar')
             listaAlbum['Item']['album']['L'].forEach(element => {
             if (element['L'][0]['S'] == 'Perfil'){
               // ---------------------------- PARA MOSTRAR EL ALBUM DE PERFIL -----------------------------------//

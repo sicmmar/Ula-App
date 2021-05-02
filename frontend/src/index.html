@@ -104,6 +104,7 @@
     <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
     <!--[if IE]><!-->
     <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <script src="js/clientAPI.js"></script>
@@ -127,13 +128,12 @@
             // ingresar con credenciales
             if (pass.value == "") alarma.innerHTML = '<div class="alert alert-danger" role="alert">Debe proveer una contraseña</div>';
             else{
-              data = JSON.stringify({
+              data = {
                 "username": username.value,
                 "contrasena": contrasena
-              });
+              };
 
-              respuesta = await connectAPI(data, 'ingresar');
-
+              respuesta = await connectGateway(data, 'ingresar');
 
               if (respuesta['status'] == 202){
                 var sesion = respuesta['Item'];
@@ -146,14 +146,14 @@
                   sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
                   sessionStorage.setItem('username', respuesta['Item']['username']['S']);
                   sessionStorage.setItem('pais', respuesta['Item']['pais']['S']);
-                  for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
+                  for (x = 1; x <= respuesta['Item']['etiquetas']['L'].length; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
                   location.href='login.html';
                 }
 
               }else if (respuesta['status'] == 303){
                 alarma.innerHTML = '<div class="alert alert-warning" role="alert">El usuario <strong>' + username.value + '</strong> no existe.</div>';
               }else{
-                alarma.innerHTML = '<div class="alert alert-danger" role="alert">Ingreso para ' + username.value + ' incorrecto!</div>';
+                alarma.innerHTML = '<div class="alert alert-danger" role="alert">Ingreso para ' + username.value + ' incorrecto! Hubo un errror!</div>';
               }
             }
           }else if(opcion == 1){

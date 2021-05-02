@@ -253,6 +253,7 @@
     <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
     <script src="js/clientAPI.js"></script>
     <script>
       function cambPerfil(){
@@ -321,7 +322,7 @@
           "b64": img.src
         })
 
-        const respuesta = await connectAPI(datos, 'editarPerfil');
+        const respuesta = await connectGateway(datos, 'editarperfil');
         const stat = respuesta['status'];
 
         if (stat == 303){
@@ -337,8 +338,9 @@
             sessionStorage.setItem('foto_perfil', respuesta['Item']['foto_perfil']['S']);
             sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
             sessionStorage.setItem('username', respuesta['Item']['username']['S']);
+            sessionStorage.setItem('pais', respuesta['Item']['pais']['S']);
             for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
-            verificarToken();
+            location.href = "login.html"
           } 
         }
         passw.value = "";

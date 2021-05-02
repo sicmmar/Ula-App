@@ -223,6 +223,7 @@
     <!--<![endif]-->
     <!-- Plugins and scripts required by this view-->
     <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
     <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
     <script src="js/clientAPI.js"></script>
     <script>
@@ -257,7 +258,7 @@
             
             //OBTENER TODAS LAS PUBLICACIONES
             var pubs = '';
-            const respuesta = await getAPI('getPost')
+            const respuesta = await getGateway('getpost')
             for(var i = 0; i < respuesta['tam']; i++){
               const item = respuesta['items'][i];
               pubs += '<div class="col-sm-6 col-md-11"><div class="card border-warning"><div class="card-header text-right"><svg class="c-icon"><use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-av-timer"></use>';
@@ -346,9 +347,8 @@
                 "b64": img.src,
                 "guardar": guardar.checked ? true : false
               });
-              console.log(datos);
               
-              const respuesta = await connectAPI(datos, 'newPost');
+              const respuesta = await connectGateway(datos, 'newpost');
               const stat = respuesta['status'];
 
               if (stat >= 200 && stat < 300){
