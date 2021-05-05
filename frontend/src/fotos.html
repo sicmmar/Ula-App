@@ -69,11 +69,11 @@
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
             </svg> Álbum</a></li>
-            <li class="c-sidebar-nav-title">Soporte</li>
-            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="chat.html">
+            <li class="c-sidebar-nav-title">Ayuda</li>
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="traducir.html">
                 <svg class="c-sidebar-nav-icon">
-                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-mobile"></use>
-                </svg>Chat</a></li>
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-translate"></use>
+                </svg>Traducir</a></li>
       </ul>
       <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
     </div>
@@ -96,7 +96,7 @@
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="login.html">Perfil</a></li>
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Publicaciones</a></li>
           <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="album.html">Álbum</a></li>
-          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="chat.html">Chat</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="traducir.html">Traducir</a></li>
         </ul>
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -141,7 +141,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Nueva Publicación</h4>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="cerrarModal()" ><span aria-hidden="true">×</span></button>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
@@ -154,6 +154,11 @@
                       <img id="prev-editar-foto" width="85%" height="100%"/>
                     </div>
                     <div class="form-group">
+                      <button id="recordButton" class="btn btn-pill btn-success" type="button" onclick="grabarVoz()">
+                        <svg class="c-icon">
+                          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-mic"></use>
+                        </svg>
+                      </button>
                       <label for="company">Descripción</label>
                       <textarea class="form-control" id="txt-foto" type="text" rows="3" placeholder="Escribe algo acerca de la foto ..."></textarea>
                     </div>
@@ -200,7 +205,7 @@
                     <div class="form-group" id="ALE-MOD"></div>
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal" onclick="cerrarModal()">Cerrar</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
                     <button class="btn btn-success" type="button" onclick="nuevaPublicacion()">Publicar</button>
                   </div>
                 </div>
@@ -225,10 +230,14 @@
     <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
     <script src="node_modules/superagent/dist/superagent.js"></script>
     <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
+  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="node_modules/file-saver/dist/FileSaver.js" ></script>
     <script src="js/clientAPI.js"></script>
+    <script src="js/micro.js"></script>
     <script>
       var nombreFoto = "";
       var extFoto = "";
+      var grabando = false;
       function subirImg(){
         var imgInput = document.getElementById('photo-edit');
         var preview = document.getElementById('prev-img');
@@ -270,6 +279,7 @@
             }
 
             document.getElementById('publicaciones').innerHTML = pubs;
+            grabando = false;
           }
       }
 
@@ -358,6 +368,23 @@
             }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el departamento donde tomó la foto</div>';
           }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el lugar donde tomó la foto</div>';
         }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese una foto para realizar publicación</div>';
+      }
+
+      //------------------------------------- PARA LO DE TRANSCRIBE
+      function grabarVoz(){
+        grabando = !grabando;
+        var recordButton = document.getElementById("recordButton");
+        
+        if(grabando){
+          recordButton.removeAttribute('class');
+          recordButton.setAttribute('class','btn btn-pill btn-danger');
+          startRecording();
+        }
+        else{
+          recordButton.removeAttribute('class');
+          recordButton.setAttribute('class','btn btn-pill btn-success');
+          stopRecording();
+        }
       }
     </script>
   </body>

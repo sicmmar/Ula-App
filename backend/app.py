@@ -3,9 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from io import BytesIO
 from datetime import date, datetime
-import boto3,json
-import base64
-import uuid
+import boto3,json, base64, uuid, time
 
 app = Flask(__name__)
 CORS(app) 
@@ -40,7 +38,14 @@ chat = boto3.client('lex-runtime',
         aws_secret_access_key=credenciales.lex['secretAccessKey']
     )
 
+transcribe = boto3.client('transcribe',
+        region_name=credenciales.transcribe['region'],
+        aws_access_key_id=credenciales.transcribe['accessKeyId'],
+        aws_secret_access_key=credenciales.transcribe['secretAccessKey']
+    )
+
 BUCKET_NAME='imagenes-ula'
+BUCKET_AUDIO='audios-ula'
 BOT_NAME='UgramPro'
 BOT_ALIAS='ugrampro'
 URL_BUCKET = 'https://imagenes-ula.s3.us-east-2.amazonaws.com/'
@@ -337,6 +342,36 @@ def getPost():
 
     return jsonify({'items':lista['Items'], 'tam': lista['Count']})
 
+###############################################################################################################################################
+# TRANSCRIBE
+@app.route('/hablar', methods=['POST'])
+def hablar():
+    nombre_audio = request.json.get('nombre')
+    time.sleep(2)
+    s3.upload_file('/tmp/' + str(nombre_audio).replace(':','_'), BUCKET_AUDIO, str(nombre_audio))
+    transcribe.start_transcription_job(
+        TranscriptionJobName='job' + str(nombre_audio).replace(':','').replace('-',''),
+        MediaFormat='wav',
+        Media={
+            'MediaFileUri': 's3://audios-ula/' + str(nombre_audio)
+        },
+        OutputBucketName=BUCKET_AUDIO,
+        OutputKey='out' + str(nombre_audio).replace(':','').replace('-','').replace('.','') + '.json',
+        IdentifyLanguage=True,
+        LanguageOptions=[
+            'en-US','es-ES','es-US'
+        ]
+    )
+    completed = False
+    while not completed:
+        response = transcribe.get_transcription_job(
+            TranscriptionJobName='job' + str(nombre_audio).replace(':','').replace('-','')
+        )
+        completed = True if response['TranscriptionJob']['TranscriptionJobStatus'] == 'COMPLETED' else False
+        if completed:
+            print(response)
+
+    return jsonify({'res':'holis'})
 
 ###############################################################################################################################################
 # MANEJO DE ALBUM
