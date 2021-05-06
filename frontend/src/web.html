@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Verificar Identidad</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+  </head>
+  <body class="c-app flex-row align-items-center" onload="start()">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card-group">
+            <div class="card mx-4">
+              <div class="card-body p-4 text-center">
+                <h1>Ula'</h1>
+                <p id="USER" class="text-muted"></p>
+                <img id="imagenPrev" width="55%" height="70%" hidden="true" />
+                <video id="video" width="55%" 
+                  height="70%" autoplay> 
+                </video>
+                <div class="mb-3" id="ALARMA"></div>
+                <button class="btn btn-lg btn-outline-primary mt-3" type="button" onclick="tomarFoto()">¡Verifica!</button>
+                  <button class="btn btn-lg btn-outline-danger mt-3" type="button" onclick="start()"><svg class="c-icon">
+                    <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-ban"></use>
+                  </svg></button>
+              </div>
+              <div class="card-footer p-4">
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-block btn-secondary" type="button" onclick="location.href='/index.html'"><span>Regresar </span></button>
+                  </div>
+                  <div class="col-6">
+                    <button id="btn-use" class="btn btn-block btn-success" type="button" onclick="ingresarUsuario()"><span>Ingresar</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
+    <script src="js/clientAPI.js"></script>
+    <script> 
+      var stop = function () { 
+          var stream = video.srcObject; 
+          var tracks = stream.getTracks(); 
+          for (var i = 0; i < tracks.length; i++) { 
+              var track = tracks[i]; 
+              track.stop(); 
+          } 
+          video.srcObject = null; 
+      }
+
+      function start () { 
+        document.getElementById('USER').textContent = 'Inicio de sesión para ' + sessionStorage.getItem('username').toString();
+        var img = document.getElementById('imagenPrev');
+        img.hidden = true;
+        img.src = "";
+
+        var video = document.getElementById('video'), 
+            vendorUrl = window.URL || window.webkitURL; 
+        video.hidden = false
+        if (navigator.mediaDevices.getUserMedia) { 
+            navigator.mediaDevices.getUserMedia({ video: true }) 
+                .then(function (stream) { 
+                    video.srcObject = stream; 
+                }).catch(function (error) { 
+                    console.log("Something went wrong!"); 
+                }); 
+        } 
+
+        document.getElementById('btn-use').disabled = true
+          
+      } 
+      function tomarFoto(){
+        video = document.getElementById("video");
+
+        const canvas = document.createElement("canvas");
+        // scale the canvas accordingly
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        // draw the video at that frame
+        canvas.getContext('2d')
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+        // convert it to a usable data URL
+        const dataURL = canvas.toDataURL()
+        video.hidden = true
+        imagen = document.getElementById("imagenPrev");
+        imagen.src = dataURL
+        imagen.hidden = false
+
+        var botonUsar = document.getElementById('btn-use');
+        botonUsar.disabled = false
+      }
+
+      const ingresarUsuario = async () => {
+        const username = sessionStorage.getItem('username');
+        var imagen = document.getElementById("imagenPrev");
+        var alarma = document.getElementById('ALARMA');
+
+        // aca va la peticion para ver si el usuario existe
+        if (username.value != ""){
+          //validaciones del usuario que no exista
+          var data = JSON.stringify({
+            "username": username,
+            "foto": imagen.src
+          });
+
+          console.log(data)
+
+          respuesta = await connectGateway(data, 'ingresarweb');
+
+
+          if (respuesta['status'] == 202){
+            var sesion = respuesta['Item'];
+            if (sesion == ''){
+              alarma.innerHTML = '<div class="alert alert-warning" role="alert">Credenciales incorrectas para <strong>' + username + '</strong></div>';
+            }else{
+              alarma.innerHTML = '<div class="alert alert-success" role="alert">Bienvenido/a <strong>' + username + '</strong></div>';
+              sessionStorage.setItem('contrasena', respuesta['Item']['contrasena']['S']);
+              sessionStorage.setItem('foto_perfil', respuesta['Item']['foto_perfil']['S']);
+              sessionStorage.setItem('nombre', respuesta['Item']['nombre']['S']);
+              sessionStorage.setItem('username', respuesta['Item']['username']['S']);
+              sessionStorage.setItem('pais', respuesta['Item']['pais']['S']);
+              for (x = 1; x <= 7; x++) sessionStorage.setItem('tag' + x.toString(), respuesta['Item']['etiquetas']['L'][x - 1]['S']);
+              location.href='login.html';
+            }
+
+          }else if (respuesta['status'] == 303){
+            alarma.innerHTML = '<div class="alert alert-warning" role="alert">El usuario <strong>' + username + '</strong> no existe.</div>';
+          }else{
+            alarma.innerHTML = '<div class="alert alert-danger" role="alert">Ingreso para ' + username + ' incorrecto!</div>';
+          }
+        }
+      }
+
+    </script> 
+    <!--<![endif]-->
+  </body>
+</html>

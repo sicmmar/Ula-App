@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.4.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Ula' - Publicaciones</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+    <link href="node_modules/@coreui/chartjs/dist/css/coreui-chartjs.css" rel="stylesheet">
+  </head>
+  <body class="c-app" onload="verToken()">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+      <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-title">Perfil</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="login.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+            </svg> Ver Perfil</a></li>
+        <li class="c-sidebar-nav-title">Manejo de Publicaciones</li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="fotos.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-camera"></use>
+            </svg> Publicaciones</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="album.html">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
+            </svg> Álbum</a></li>
+            <li class="c-sidebar-nav-title">Ayuda</li>
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="traducir.html">
+                <svg class="c-sidebar-nav-icon">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-translate"></use>
+                </svg>Traducir</a></li>
+      </ul>
+      <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    </div>
+    <div class="c-wrapper c-fixed-components">
+      <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button><a class="c-header-brand d-lg-none" href="#">
+          <svg width="118" height="46" alt="CoreUI Logo">
+            <use xlink:href="assets/brand/coreui.svg#full"></use>
+          </svg></a>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+          <svg class="c-icon c-icon-lg">
+            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
+          </svg>
+        </button>
+        <ul class="c-header-nav d-md-down-none">
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="login.html">Perfil</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="fotos.html">Publicaciones</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="album.html">Álbum</a></li>
+          <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="traducir.html">Traducir</a></li>
+        </ul>
+        <ul class="c-header-nav ml-auto mr-4">
+          <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <div class="c-avatar"><img id="img-perfil" class="c-avatar-img"><span class="c-avatar-status bg-success"></span></div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right pt-0">
+              <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                <svg class="c-icon mr-2">
+                  <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-account-logout"></use>
+                </svg> Salir</a>
+            </div>
+          </li>
+        </ul>
+      </header>
+      <div class="c-body">
+        <main class="c-main">
+          <div class="container-fluid">
+            <div class="fade-in"><div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h4 class="card-title mb-0">Publicaciones</h4>
+                  </div>
+                  <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#infoModal">
+                      <svg class="c-icon">
+                        <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-note-add"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div id="publicaciones" class="row">
+                  <!-- /.col-->
+                  
+                  <!--ACA TERMINA -->
+                </div>
+              </div>
+            </div>
+            <!-- /.card-->
+            <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-success" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Nueva Publicación</h4>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="company">Elige una foto para publicar</label>
+                      <div class="col-md-9">
+                        <input id="editar-foto" onchange="cambPerfil()" type="file" accept="image/png, image/jpeg">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <img id="prev-editar-foto" width="85%" height="100%"/>
+                    </div>
+                    <div class="form-group">
+                      <button id="recordButton" class="btn btn-pill btn-success" type="button" onclick="grabarVoz()">
+                        <svg class="c-icon">
+                          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-mic"></use>
+                        </svg>
+                      </button>
+                      <label for="company">Descripción</label>
+                      <textarea class="form-control" id="txt-foto" type="text" rows="3" placeholder="Escribe algo acerca de la foto ..."></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Lugar donde la tomaste</label>
+                      <input class="form-control" id="lugar-foto" type="text" placeholder="">
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Departamento</label>
+                      <select id="dpto-foto" class="form-control">
+                        <option value=""></option>
+                        <option value="Alta Verapaz">Alta Verapaz</option>
+                        <option value="Baja Verapaz">Baja Verapaz</option>
+                        <option value="Chimaltenango">Chimaltenango</option>
+                        <option value="Chiquimula">Chiquimula</option>
+                        <option value="Petén">Petén</option>
+                        <option value="El Progreso">El Progreso</option>
+                        <option value="Quiché">Quiché</option>
+                        <option value="Escuintla">Escuintla</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Huehuetenango">Huehuetenango</option>
+                        <option value="Izabal">Izabal</option>
+                        <option value="Jalapa">Jalapa</option>
+                        <option value="Jutiapa">Jutiapa</option>
+                        <option value="Quetzaltenango">Quetzaltenango</option>
+                        <option value="Retalhuleu">Retalhuleu</option>
+                        <option value="Sacatepéquez">Sacatepéquez</option>
+                        <option value="San Marcos">San Marcos</option>
+                        <option value="Santa Rosa">Santa Rosa</option>
+                        <option value="Sololá">Sololá</option>
+                        <option value="Suchitepéquez">Suchitepéquez</option>
+                        <option value="Totonicapán">Totonicapán</option>
+                        <option value="Zacapa">Zacapa</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="company">Guardar en álbum personal</label>
+                    </div>
+                    <div class="form-group">
+                      <label class="c-switch c-switch-label c-switch-pill c-switch-outline-success">
+                        <input id="guardar-album" class="c-switch-input" type="checkbox" checked=""><span class="c-switch-slider" data-checked="&#x2713" data-unchecked="&#x2715"></span>
+                      </label>
+                    </div>
+                    <div class="form-group" id="ALE-MOD"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-success" type="button" onclick="nuevaPublicacion()">Publicar</button>
+                  </div>
+                </div>
+                <!-- /.modal-content-->
+              </div>
+              <!-- /.modal-dialog-->
+            </div>
+            </div>
+          </div>
+        </main>
+        <footer class="c-footer">
+          <div>Mariana Sic. 201504051</div>
+        </footer>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>
+    <!--<![endif]-->
+    <!-- Plugins and scripts required by this view-->
+    <script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>
+    <script src="node_modules/superagent/dist/superagent.js"></script>
+    <script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>
+  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="node_modules/file-saver/dist/FileSaver.js" ></script>
+    <script src="js/clientAPI.js"></script>
+    <script src="js/micro.js"></script>
+    <script>
+      var nombreFoto = "";
+      var extFoto = "";
+      var grabando = false;
+      function subirImg(){
+        var imgInput = document.getElementById('photo-edit');
+        var preview = document.getElementById('prev-img');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        var arr = imgInput.value.split("C:\\fakepath\\")[1].split('.');
+        document.getElementById('name-photo').value = arr[0];
+        document.getElementById('ext-img').innerHTML = '<span id="EXT" class="input-group-text">' + arr[1] + '</span>';
+        document.getElementById('sub-btn').disabled = false;
+      }
+
+      const verToken = async () => {
+        const pass = sessionStorage.getItem('contrasena');
+          if (pass == null){
+            window.location = 'index.html';
+          }else{
+            document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
+            
+            //OBTENER TODAS LAS PUBLICACIONES
+            var pubs = '';
+            const respuesta = await getGateway('getpost')
+            for(var i = 0; i < respuesta['tam']; i++){
+              const item = respuesta['items'][i];
+              pubs += '<div class="col-sm-6 col-md-11"><div class="card border-warning"><div class="card-header text-right"><svg class="c-icon"><use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-av-timer"></use>';
+              pubs += '</svg> <mark><small> ' + item['fechahora']['S'] + '</small></mark></div><div class="card-body text-center"><div class="row"><div class="col-sm-6 col-md-5"><img src="' + item['foto']['S'] + '" width="85%" height="100%"/></div>';
+              pubs += '<div class="col-sm-6 col-md-5"><div class="form-group"><h4><br>' + item['lugar']['S'] + '</h4></div><br><br><br><div class="form-group"><p>' + item['descripcion']['S'] + '</p></div><br><br><br><div class="form-group"><h5><svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-location-pin"></use></svg></span> ' + item['departamento']['S'] + '</h5></div></div></div></div><div class="card-footer text-right"><svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-flag-alt"></use></svg> <mark>' + item['pais']['S'] + '</mark>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg class="c-icon">';
+              pubs += '<use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-user"></use></svg> <mark>' + item['username']['S'] + '</mark></div></div></div>';
+            }
+
+            document.getElementById('publicaciones').innerHTML = pubs;
+            grabando = false;
+          }
+      }
+
+      const nuevaFoto = async () => {
+        var img = document.getElementById('prev-img');
+        var nombre_foto = document.getElementById('name-photo');
+        var imgInput = document.getElementById('photo-edit');
+        var ALERTA = document.getElementById('ALERT-SUB');
+        var descripcion = document.getElementById('txt-foto');
+
+        if(img.src != '' && nombre_foto.value != ''){
+          ALERTA.innerHTML = "";
+          
+          var datos = JSON.stringify({
+            "username": sessionStorage.getItem('username'),
+            "nFoto":nombre_foto.value,
+            "ext":imgInput.value.split("C:\\fakepath\\")[1].split('.')[1],
+            "b64":img.src,
+            "descripcion": descripcion.value == "" ? "Sin descripción" : descripcion.value
+          });
+
+          const respuesta = await connectAPI(datos, 'nuevaFoto');
+          if (respuesta['status'] == 202 && respuesta['existe'] != null){
+            ALERTA.innerHTML = '<div class="alert alert-success" role="alert">Foto <strong>' + nombre_foto.value + '</strong> cargada.</div>';
+            img.src = "";
+            document.getElementById('ext-img').innerHTML = '';
+            nombre_foto.value = ""
+            document.getElementById('sub-btn').disabled = true;
+          }else ALERTA.innerHTML = '<div class="alert alert-warning" role="alert">Error al cargar <strong>' + nombre_foto.value + '</strong></div>';
+        }else{
+          ALERTA.innerHTML = '<div class="alert alert-danger" role="alert">Ingrese la foto a cargar.</div>';
+        }
+      }
+
+      ///////-------------------------- PARA REALIZAR NUEVA PUBICACION
+      function cambPerfil(){
+        var imgInput = document.getElementById('editar-foto');
+        var preview = document.getElementById('prev-editar-foto');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        reader.addEventListener("load", function () {
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+
+        nombreFoto = imgInput.value.split("C:\\fakepath\\")[1].split('.')[0];
+        extFoto = imgInput.value.split("C:\\fakepath\\")[1].split('.')[1];
+      }
+
+      const nuevaPublicacion = async () => {
+        var img = document.getElementById('prev-editar-foto');
+        var imgInput = document.getElementById('editar-foto');
+        var desc = document.getElementById('txt-foto');
+        var departamento = document.getElementById('dpto-foto');
+        var lugar = document.getElementById('lugar-foto');
+        var guardar = document.getElementById('guardar-album');
+        var reader = new FileReader();
+        var file = imgInput.files[0]; 
+
+        if (img.src != ""){
+          if(lugar.value != ""){
+            if(departamento.value != ""){
+              var datos = JSON.stringify({
+                "username": sessionStorage.getItem('username'),
+                "descripcion" : desc.value == "" ? "Sin descripción" : desc.value,
+                "departamento" : departamento.value,
+                "lugar" : lugar.value,
+                "pais" : sessionStorage.getItem('pais'),
+                "nFoto": file['name'].toString().split('.')[0],
+                "ext":file['name'].toString().split('.')[1],
+                "b64": img.src,
+                "guardar": guardar.checked ? true : false
+              });
+              
+              const respuesta = await connectGateway(datos, 'newpost');
+              const stat = respuesta['status'];
+
+              if (stat >= 200 && stat < 300){
+                document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-success" role="alert">Publicación realizada</div>';
+                location.href = 'fotos.html'
+              }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">No se ha podido realizar la publicación</div>';
+            }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el departamento donde tomó la foto</div>';
+          }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese el lugar donde tomó la foto</div>';
+        }else document.getElementById('ALE-MOD').innerHTML = '<div class="alert alert-warning" role="alert">Ingrese una foto para realizar publicación</div>';
+      }
+
+      //------------------------------------- PARA LO DE TRANSCRIBE
+      function grabarVoz(){
+        grabando = !grabando;
+        var recordButton = document.getElementById("recordButton");
+        
+        if(grabando){
+          recordButton.removeAttribute('class');
+          recordButton.setAttribute('class','btn btn-pill btn-danger');
+          startRecording();
+        }
+        else{
+          recordButton.removeAttribute('class');
+          recordButton.setAttribute('class','btn btn-pill btn-success');
+          stopRecording();
+        }
+      }
+    </script>
+  </body>
+</html>

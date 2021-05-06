@@ -1,0 +1,10 @@
+version: "3"
+
+services:     
+  servidor: 
+    container_name: servidor
+    build: ./
+    expose:
+      - "7050"
+    ports: 
+      - "7050:7050"
