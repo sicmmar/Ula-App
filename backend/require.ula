@@ -1,0 +1,9 @@
+flask
+flask_cors
+io
+datetime
+boto3
+json
+base64
+uuid
+time
