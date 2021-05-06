@@ -1,4 +1,4 @@
-const URL = "localhost:7050";
+const URL = "3.21.75.136:7050";
 const APIG = "https://ys642emfcc.execute-api.us-east-2.amazonaws.com/ulaApi/"
 
 const connectAPI = async (cuerpo, endpoint) => {
