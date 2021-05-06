@@ -16,7 +16,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>Ula' - Chat</title>
+    <title>Ula' - Traducir</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
@@ -115,24 +115,212 @@
         <main class="c-main">
           <div class="container-fluid">
             <div class="fade-in">
-              <div class="card">
-                <div id="header-chat" class="card-header"> Historial</div>
-                <div id="historial" class="card-body"></div>
-              </div>
-              <div class="card">
-                <div class="card-header"> Manejo de Sesión</div>
-                <div class="card-body">
-                  <div class="form-group">
-                    <label>Envía tu mensaje</label>
-                    <input class="form-control" id="txt-enviar" type="text" placeholder="Escribe algo aquí ..." onkeypress="verificar(event)" disabled>
-                  </div>
-                  <div class="form-group">
-                    <button id="btn-enviar" class="btn btn-sm btn-primary" type="submit" onclick="enviarMensaje()" disabled>Enviar</button>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="card border-success">
+                    <div class="card-header">Texto de Origen</div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <textarea class="form-control" id="txt-orig" type="text" rows="5" placeholder="Origen ..."></textarea>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="card-footer">
-                    <button id="btn-inicio" class="btn btn-sm btn-success" type="submit" onclick="inicioConversacion()">Iniciar Conversación</button>
-                    <button id="btn-fin" class="btn btn-sm btn-danger" type="reset" onclick="finConversacion()" disabled>Terminar Conversación</button>
+                <div class="col-sm-4">
+                  <div class="card border-info">
+                    <div class="card-header">Elegir Idiomas</div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend"><span class="input-group-text">Origen</span></div>
+                          <select class="form-control" id="s-in" name="select3">
+                            <option value="auto">Automático</option>
+                            <option value="af">Afrikáans</option>
+                            <option value="sq">Albanés</option>
+                            <option value="am">Amárico</option>
+                            <option value="ar">Árabe</option>
+                            <option value="hy">Armenio</option>
+                            <option value="az">Azerbaiyano</option>
+                            <option value="bn">Bengalí</option>
+                            <option value="bs">Bosnio</option>
+                            <option value="bg">Búlgaro</option>
+                            <option value="ca">Catalán</option>
+                            <option value="zh">Chino simplificado</option>
+                            <option value="zh-TW">Chino tradicional</option>
+                            <option value="hr">Croata</option>
+                            <option value="cs">Checo</option>
+                            <option value="da ">Danés</option>
+                            <option value="fa-AF">Dari</option>
+                            <option value="nl ">Neerlandés</option>
+                            <option value="en">Inglés</option>
+                            <option value="et">Estonio</option>
+                            <option value="fa">Farsi (persa)</option>
+                            <option value="tl">Tagalo</option>
+                            <option value="fi">Finés</option>
+                            <option value="fr">Francés</option>
+                            <option value="fr-CA">Francés (Canadá)</option>
+                            <option value="ka">Georgiano</option>
+                            <option value="de">Alemán</option>
+                            <option value="el">Griego</option>
+                            <option value="GU">Gujarati</option>
+                            <option value="HT">Criollo haitiano</option>
+                            <option value="ha">Hausa</option>
+                            <option value="he ">Hebreo</option>
+                            <option value="hi">Hindi</option>
+                            <option value="hu">Húngaro</option>
+                            <option value="is">Islandés</option>
+                            <option value="id ">Indonesio</option>
+                            <option value="it">Italiano</option>
+                            <option value="ja">Japonés</option>
+                            <option value="KN">Canada</option>
+                            <option value="kk">Kazajo</option>
+                            <option value="ko">Coreano</option>
+                            <option value="lv">Letón</option>
+                            <option value="lt">lituano</option>
+                            <option value="MK">Macedonio</option>
+                            <option value="ms">Malayo</option>
+                            <option value="mL">Malayalam</option>
+                            <option value="MT">Maltés</option>
+                            <option value="mn">mongol</option>
+                            <option value="no">Noruego</option>
+                            <option value="fa">Persa</option>
+                            <option value="ps">Pastún</option>
+                            <option value="pl">Polaco</option>
+                            <option value="pt">Portugués</option>
+                            <option value="ro">Rumano</option>
+                            <option value="ru">Ruso</option>
+                            <option value="sr">Serbio</option>
+                            <option value="SI">cingalés</option>
+                            <option value="sk">Eslovaco</option>
+                            <option value="sl">Esloveno</option>
+                            <option value="so">Somalí</option>
+                            <option value="es">Español</option>
+                            <option value="es-MX">Español (México)</option>
+                            <option value="sw">Suajili</option>
+                            <option value="sv">Sueco</option>
+                            <option value="tl">Tagalo</option>
+                            <option value="ta">Tamil</option>
+                            <option value="TE">Telugu</option>
+                            <option value="th">Tailandés</option>
+                            <option value="tr">Turco</option>
+                            <option value="uk">Ucraniano</option>
+                            <option value="ur">Urdu</option>
+                            <option value="UZ">Uzbeko</option>
+                            <option value="vi">Vietnamita</option>
+                            <option value="CY">Galés</option>
+                          </select>
+                          <div class="input-group-append"><span class="input-group-text">
+                              <svg class="c-icon">
+                                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-chevron-double-right"></use>
+                              </svg></span></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-append"><span class="input-group-text">
+                              <svg class="c-icon">
+                                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-check"></use>
+                              </svg></span></div>
+                          <select class="form-control" id="s-out" name="select3">
+                            <option value="af">Afrikáans</option>
+                            <option value="sq">Albanés</option>
+                            <option value="am">Amárico</option>
+                            <option value="ar">Árabe</option>
+                            <option value="hy">Armenio</option>
+                            <option value="az">Azerbaiyano</option>
+                            <option value="bn">Bengalí</option>
+                            <option value="bs">Bosnio</option>
+                            <option value="bg">Búlgaro</option>
+                            <option value="ca">Catalán</option>
+                            <option value="zh">Chino simplificado</option>
+                            <option value="zh-TW">Chino tradicional</option>
+                            <option value="hr">Croata</option>
+                            <option value="cs">Checo</option>
+                            <option value="da ">Danés</option>
+                            <option value="fa-AF">Dari</option>
+                            <option value="nl ">Neerlandés</option>
+                            <option value="en">Inglés</option>
+                            <option value="et">Estonio</option>
+                            <option value="fa">Farsi (persa)</option>
+                            <option value="tl">Tagalo</option>
+                            <option value="fi">Finés</option>
+                            <option value="fr">Francés</option>
+                            <option value="fr-CA">Francés (Canadá)</option>
+                            <option value="ka">Georgiano</option>
+                            <option value="de">Alemán</option>
+                            <option value="el">Griego</option>
+                            <option value="GU">Gujarati</option>
+                            <option value="HT">Criollo haitiano</option>
+                            <option value="ha">Hausa</option>
+                            <option value="he ">Hebreo</option>
+                            <option value="hi">Hindi</option>
+                            <option value="hu">Húngaro</option>
+                            <option value="is">Islandés</option>
+                            <option value="id ">Indonesio</option>
+                            <option value="it">Italiano</option>
+                            <option value="ja">Japonés</option>
+                            <option value="KN">Canada</option>
+                            <option value="kk">Kazajo</option>
+                            <option value="ko">Coreano</option>
+                            <option value="lv">Letón</option>
+                            <option value="lt">lituano</option>
+                            <option value="MK">Macedonio</option>
+                            <option value="ms">Malayo</option>
+                            <option value="mL">Malayalam</option>
+                            <option value="MT">Maltés</option>
+                            <option value="mn">mongol</option>
+                            <option value="no">Noruego</option>
+                            <option value="fa">Persa</option>
+                            <option value="ps">Pastún</option>
+                            <option value="pl">Polaco</option>
+                            <option value="pt">Portugués</option>
+                            <option value="ro">Rumano</option>
+                            <option value="ru">Ruso</option>
+                            <option value="sr">Serbio</option>
+                            <option value="SI">cingalés</option>
+                            <option value="sk">Eslovaco</option>
+                            <option value="sl">Esloveno</option>
+                            <option value="so">Somalí</option>
+                            <option value="es">Español</option>
+                            <option value="es-MX">Español (México)</option>
+                            <option value="sw">Suajili</option>
+                            <option value="sv">Sueco</option>
+                            <option value="tl">Tagalo</option>
+                            <option value="ta">Tamil</option>
+                            <option value="TE">Telugu</option>
+                            <option value="th">Tailandés</option>
+                            <option value="tr">Turco</option>
+                            <option value="uk">Ucraniano</option>
+                            <option value="ur">Urdu</option>
+                            <option value="UZ">Uzbeko</option>
+                            <option value="vi">Vietnamita</option>
+                            <option value="CY">Galés</option>
+                          </select>
+                          <div class="input-group-prepend"><span class="input-group-text">Destino</span></div>
+                        </div>
+                      </div>
+                      <div class="form-group form-actions text-center">
+                        <button class="btn btn-pill btn-info" type="submit" onclick="traducir()">
+                          <svg class="c-icon">
+                            <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-translate"></use>
+                          </svg> Traducir</button>
+                      </div>
+
+                      <div class="form-group form-actions text-center">
+                        <div id="ALERTA"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card border-danger">
+                    <div class="card-header">Texto Salida</div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <textarea class="form-control" id="txt-dest" type="text" rows="5" placeholder="Resultado ..." disabled></textarea>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -162,51 +350,24 @@
           }
       }
 
-      const inicioConversacion = async () => {
-          document.getElementById('btn-fin').disabled = false;
-          document.getElementById('txt-enviar').disabled = false;
-          document.getElementById('btn-enviar').disabled = false;
-          var fecha = new Date();
-          var datos = JSON.stringify({
-            "username": sessionStorage.getItem('username')
+      const traducir = async () => {
+        var origen = document.getElementById('txt-orig');
+        var alerta = document.getElementById('ALERTA');
+        alerta.innerHTML = '';
+        
+        if(origen.value != ""){
+          let datos = JSON.stringify({
+            "texto": origen.value,
+            "origen": document.getElementById('s-in').value,
+            "destino": document.getElementById('s-out').value
           });
 
-          const respuesta = await connectAPI(datos, 'iniciarChat');
+          const resp = await connectAPI(datos, 'traducir');
+        
+          document.getElementById('txt-dest').textContent = resp['texto'];
+          alerta.innerHTML = '<div class="alert alert-success" role="alert">Traducción Realizada</div>';
 
-          document.getElementById('header-chat').innerHTML = 'Historial de conversación con ' + sessionStorage.getItem('nombre') + ' <b>' 
-            + new Date().toISOString().split('T')[0] + '</b>'
-      }
-
-      const enviarMensaje = async () => {
-        var mensaje = document.getElementById('txt-enviar').value;
-        var hist = document.getElementById('historial');
-        var today = new Date();
-        hist.innerHTML += '<div class="alert alert-info text-right" role="alert"><small><b>' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + '&nbsp;&nbsp;&nbsp;&nbsp;</b></small>' + mensaje + '&nbsp;&nbsp;<div class="c-avatar"><img src="' + sessionStorage.getItem('foto_perfil') + '" class="c-avatar-img"></div></div>'
-
-        var datos = JSON.stringify({
-            "username": sessionStorage.getItem('username'),
-            "mensaje":mensaje
-        });
-        document.getElementById('txt-enviar').value = "";
-
-        const respuesta = await connectAPI(datos, 'conversarChat');
-
-        hist.innerHTML += '<div class="alert alert-dark text-left" role="alert"><div class="c-avatar"><img src="assets/img/avatars/bot.png" class="c-avatar-img"></div>&nbsp;&nbsp;' + respuesta['message'] + '<small><b>&nbsp;&nbsp;&nbsp;&nbsp;' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + '</b></small></div>'
-        window.scrollTo(0,document.body.scrollHeight);
-      }
-
-      const finConversacion = async () => {
-        var datos = JSON.stringify({
-            "username": sessionStorage.getItem('username')
-        });
-
-        const respuesta = await connectAPI(datos, 'finChat');
-        location.href='chat.html'
-      }
-
-      function verificar(event){
-        var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
-        if (chCode == 13) enviarMensaje();
+        }else alerta.innerHTML = '<div class="alert alert-danger" role="alert">Debe proveer un texto de entrada</div>';
       }
     </script>
   </body>

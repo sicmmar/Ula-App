@@ -116,40 +116,6 @@
           <div class="container-fluid">
             <div class="fade-in">
               <div id="ALBUMES"></div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="card">
-                    <div class="card-header">Traducción de Texto</div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-7">
-                          <div class="form-group">
-                            <label for="ccmonth">Texto de Origen</label>
-                            <textarea class="form-control" id="txt-orig" type="text" rows="3" placeholder="Origen ..."></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label for="ccmonth">Texto Traducido</label>
-                            <textarea class="form-control" id="txt-dest" type="text" rows="3" placeholder="Destino ..."></textarea>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label for="ccmonth">Volver a traducir</label>
-                            <button class="btn btn-danger" type="button" onclick="traducir('en', 'TXT')">Inglés</button>
-                          </div>
-                          <div class="form-group">
-                            <button class="btn btn-success" type="button" onclick="traducir('pt', 'TXT')">Portugués</button>
-                          </div>
-                          <div class="form-group">
-                            <button class="btn btn-primary" type="button" onclick="traducir('ru', 'TXT')">Ruso</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="ALERT-NEW"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </main>
@@ -174,7 +140,6 @@
           if (pass == null){
             window.location = 'index.html';
           }else{
-            document.getElementById('ALERT-NEW').innerHTML = ''
             var cartaAlbum = ''
             document.getElementById('img-perfil').src = sessionStorage.getItem('foto_perfil');
             const listaAlbum = await connectGateway(JSON.stringify({'username': sessionStorage.getItem('username'), 'contrasena':sessionStorage.getItem('contrasena')}), 'ingresar')
@@ -196,8 +161,7 @@
                 cartaAlbum += '<div class="col-sm-6 col-lg-3"><div class="card text-center"><div class="card-header"><h5 class="card-title mb-0">' + fotico['L'][0]['S'];
                 cartaAlbum += '</h5></div><div class="card-body text-center"><img width="87%" height="100%" src="' + fotico['L'][2]['S'];
                 cartaAlbum += '"/></div><div class="card-footer"><p>' + fotico['L'][1]['S']
-                cartaAlbum += '</p><button class="btn btn-sm btn-danger" type="button" onclick="traducir(\'en\',`' + fotico['L'][1]['S'];
-                cartaAlbum += '`)" >INGLÉS</button></div></div></div>';
+                cartaAlbum += '</p></div></div></div>';
               });
               cartaAlbum += '</div></div></div>'
             }
@@ -206,48 +170,6 @@
           document.getElementById('ALBUMES').innerHTML = cartaAlbum;
 
           }
-      }
-
-      const crearAlbum = async () => {
-        var ALERTA = document.getElementById('ALERT-NEW');
-        var nombrenuevo = document.getElementById('name-album').value
-        if (nombrenuevo != ''){
-          const resp = await connectAPI(JSON.stringify({'username':sessionStorage.getItem('username'), 'album':nombrenuevo}), 'newAlbum');
-          if(resp['status'] == 202 && resp['existe'] != ''){
-            document.getElementById('name-album').value = "";
-            ALERTA.innerHTML = '<div class="alert alert-success" role="alert">El álbum <strong>' + nombrenuevo + '</strong> ha sido creado. Recarga la <a class="alert-link" href="album.html">página</a>.</div>';
-          }else ALERTA.innerHTML = '<div class="alert alert-warning" role="alert">El álbum <strong>' + nombrenuevo + '</strong> no se ha podido crear.</div>';
-        }else{
-          ALERTA.innerHTML = '<div class="alert alert-danger" role="alert">Ingrese el nombre del álbum a crear.</div>';
-        }
-
-      }
-
-      const eliminarAlbum = async () => {
-        var ALERTA = document.getElementById('ALERT-DEL');
-        var listaOpc = document.getElementById('album-chooser')
-        if(listaOpc.value == 'Perfil'){
-          ALERTA.innerHTML = '<div class="alert alert-danger" role="alert">El álbum <strong>' + listaOpc.value + '</strong> no se puede eliminar. Intente con otro.</div>';
-        }else{
-          const resp = await connectAPI(JSON.stringify({'username':sessionStorage.getItem('username'), 'album':listaOpc.value}), 'deleteAlbum');
-          if(resp['status'] == 202 && resp['existe'] != ''){
-            ALERTA.innerHTML = '<div class="alert alert-success" role="alert">El álbum <strong>' + listaOpc.value + '</strong> ha sido eliminado. Recarga la <a class="alert-link" href="album.html">página</a>.</div>';
-          }else ALERTA.innerHTML = '<div class="alert alert-warning" role="alert">El álbum <strong>' + listaOpc.value + '</strong> no se ha podido eliminar.</div>';
-        }
-      }
-
-      const traducir = async (target, texto) => {
-        window.scrollTo(0,document.body.scrollHeight);
-        var datos;
-        if (texto.toString() == 'TXT') datos = JSON.stringify({'destino':target, 'texto':document.getElementById('txt-orig').value})
-        else{
-          document.getElementById('txt-orig').value = texto;
-          datos = JSON.stringify({'destino':target, 'texto':texto})
-        }
-
-        const resp = await connectAPI(datos, 'traducir');
-        
-        document.getElementById('txt-dest').textContent = resp['texto'];
       }
     </script>
   </body>

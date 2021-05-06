@@ -535,9 +535,10 @@ def extraerTexto():
 @app.route('/traducir', methods=['POST'])
 def traducir():
     idioma_destino = request.json.get('destino')
+    idioma_origen = request.json.get('origen')
     texto = request.json.get('texto')
 
-    response = translate.translate_text(Text=texto,SourceLanguageCode='auto',TargetLanguageCode=idioma_destino)
+    response = translate.translate_text(Text=texto,SourceLanguageCode=idioma_origen,TargetLanguageCode=idioma_destino)
 
     return jsonify({'texto':response['TranslatedText']})
 
