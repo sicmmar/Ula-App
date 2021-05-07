@@ -301,5 +301,11 @@ get_transcription_job(
 
 </td>
 </tr>
+<tr>
+<td><img src="img/iam.png"></td>
+<td>Manejo de Usuarios</td>
+<td>Creación de distintos usuarios para llevar un orden de políticas de los diferentes servicios descritos anteriormente</td>
+<td><img src="img/console.png"></td>
+</tr>
 </tbody>
 </table>
